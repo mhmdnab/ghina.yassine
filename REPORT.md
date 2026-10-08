@@ -1,9 +1,9 @@
 # REPORT: Dr. Ghina Yassine Dental Clinic demo site
 
-Last updated: 2026-10-08, end of Phase 0.
+Last updated: 2026-10-08, end of Phase 1.
 
-Status: **Phase 0 done. Google Maps data collected (via browser, no API key). Waiting for
-Instagram assets before Phase 1.**
+Status: **Phase 1 done with Google Maps assets only (no Instagram yet). Waiting for your
+go-ahead on the image plan and palette before Phase 2.**
 
 ---
 
@@ -11,52 +11,25 @@ Instagram assets before Phase 1.**
 
 ### Phase 0: Setup and asset intake
 
-- Scaffolded Next.js 16.4 (App Router) + TypeScript + Tailwind CSS 4 + ESLint with
-  `create-next-app`. The default starter page is still in place; it gets replaced in Phase 2.
-  `npm run build` passes.
-- Created the folder structure: `assets-raw/instagram/`, `assets-raw/logo/` (drop zones with
-  READMEs), `assets-raw/maps/`, `data/`, `scripts/`.
-- `scripts/fetch-maps.ts` (`npm run fetch:maps`): the Places API (New) route as specified.
-  Reads `GOOGLE_MAPS_API_KEY` from `.env.local`, saves `data/place.json`, `data/reviews.json`,
-  `data/photo-attributions.json` and photos to `assets-raw/maps/`. Key is redacted from all
-  output. Tested without a key, with a fake key (real Google error came back) and against a
-  mocked API. **Not run for real: no API key could be created.**
-- `scripts/fetch-maps-browser.ts` (`npm run fetch:maps:browser`): fallback that reads the
-  public Google Maps listing with headless Chromium (`playwright-core` 1.56.1) and writes the
-  same files. **This is what produced the current data.** Run on 2026-10-08.
-  - Review text is the reviewer's original wording. If Google shows a translation, the script
-    switches to the original and stores the translation separately (none of the 5 needed it).
-  - Photos are downloaded at max 1600px wide, each with its contributor name, profile link
-    and upload month.
-- `.gitignore` ignores `.env*` and `.env.local`; `.env.example` is committed with an empty key.
+- Next.js 16.4 (App Router) + TypeScript + Tailwind CSS 4 + ESLint scaffold. Default starter
+  page still in place until Phase 2. `npm run build` passes.
+- Folders: `assets-raw/{instagram,logo,maps}/`, `data/`, `scripts/`.
+- `scripts/fetch-maps.ts` (`npm run fetch:maps`): Places API (New) route as specified.
+  Tested, but **not run for real: no API key could be created.**
+- `scripts/fetch-maps-browser.ts` (`npm run fetch:maps:browser`): reads the public Google Maps
+  listing with headless Chromium and writes the same files. **This produced the current
+  data** (run 2026-10-08): listing facts, 5 reviews in their original wording, 9 photos with
+  contributor credits, and the clinic's Google profile photo, which is her logo.
+- `.env*` and `.env.local` git-ignored; `.env.example` committed with an empty key.
 
-### Phase 0 intake results
+Facts confirmed from the listing: rating **4.9 from 54 reviews** (53 five-star, 1 one-star);
+Rubik building, 5th floor, Alfred Naccash, Beirut (plus code VGMC+38); +961 3 698 486;
+Monday to Saturday 8 AM to 8 PM, Sunday closed; wheelchair accessible restroom and seating;
+"Identifies as women-owned". Google's review topics: dental experience (6), comforting
+atmosphere (4), and 2 each for thoroughness, gentle care, clear explanations, excellent work,
+cleanliness, trustworthy, patient care, humble.
 
-| Source | Result |
-| --- | --- |
-| Google Maps listing facts (`data/place.json`) | Name, category, rating, review count, star breakdown, review topics, address, phone, plus code, weekly hours, accessibility attributes |
-| Google Maps reviews (`data/reviews.json`) | **5 reviews**, all 5 stars, all English, all with text (Google's cap for signed-out visitors, see Deferred) |
-| Google Maps photos (`assets-raw/maps/`) | **9 listing photos** + the owner account's profile photo (her logo). 1 Street View panorama skipped |
-| `assets-raw/logo/` | `logo-from-google-profile.jpg` (copy of the owner profile photo, 1024x1024) |
-| `assets-raw/instagram/` | Empty. Instagram could not be read (login wall, see Deferred) |
-| `assets-raw/instagram/captions.txt` | Not provided |
-
-### Facts confirmed from the listing (2026-10-08)
-
-- Listing name: "Dr.ghina yassine clinic achrafieh". Category: Dental clinic.
-- Rating **4.9 from 54 reviews**: 53 five-star, 0 four/three/two-star, 1 one-star.
-- Address: Rubik building, 5th floor, Alfred Naccash, Beirut, Lebanon. Plus code VGMC+38.
-- Phone: +961 3 698 486.
-- Hours: Monday to Saturday 8 AM to 8 PM, Sunday closed (matches the brief).
-- Attributes: wheelchair accessible restroom, wheelchair accessible seating, "Identifies as
-  women-owned".
-- Google's review topics: dental experience (6), comforting atmosphere (4), and 2 each for
-  thoroughness, gentle care, clear explanations, excellent work, cleanliness, trustworthy,
-  patient care, humble. These line up with the positioning in the brief.
-- Her logo tagline reads **"Dental and Facial Esthetics"**. This is the only service-level
-  hint so far. What "facial esthetics" covers is not stated anywhere: `[CONFIRM]`.
-
-### The 5 reviews (preview; exact text in `data/reviews.json`)
+The 5 reviews (exact text in `data/reviews.json`):
 
 | Reviewer | When | Theme |
 | --- | --- | --- |
@@ -66,96 +39,211 @@ Instagram assets before Phase 1.**
 | sawsan h | a year ago | No longer a nightmare, light and comforting, soothing background music |
 | Alia Al hajj | a year ago | Clean and hygienic, good vibes, warm welcome |
 
-### Maps photos (first look; full categorization in Phase 1)
+### Phase 1: Asset processing
 
-| File | Contributor | Date | What it shows | Size |
+- Viewed every image in `assets-raw/` at full size and categorized it (table below).
+- `data/assets.json`: every usable image with source, category, description, suggested
+  section, alt text, crop, flags, plus (filled by the script) its Google Maps credit line,
+  output sizes and a blur placeholder. Excluded images are listed with the reason.
+- `scripts/process-images.ts` (`npm run process:images`): `sharp` converts each entry to WebP
+  in `public/images/`: `{id}.webp` (max 1920px wide, never upscaled) and `{id}-card.webp`
+  (max 720px wide). 8 images, 16 files, 1.1 MB total. Originals in `assets-raw/` are read
+  only; git confirms they are unchanged.
+- `scripts/process-logo.ts` (`npm run process:logo`): clean logo set in `public/brand/` and
+  app icons (details below).
+- `data/design-tokens.json`: proposed palette with WCAG contrast checks, typography, radii.
+- `data/services.json`: services backed by evidence, the approach points from reviews, and
+  the `[CONFIRM]` list.
+- No `captions.txt`, so services come only from her logo text and her reviews (see below).
+- New dev dependencies: `sharp` 0.35.5, `potrace` 2.1.8 (with a small type declaration in
+  `scripts/types/potrace.d.ts`).
+
+### Asset inventory
+
+| Raw file | Source / contributor | Category | What it shows | Decision |
 | --- | --- | --- | --- | --- |
-| maps-01.jpg | Dr.ghina yassine clinic (owner) | Apr 2023 | Close-up of a smile, veneers style, black background | 1600x900 |
-| maps-02.jpg | Dr.ghina yassine clinic (owner) | Mar 2023 | Styled smile shot, red lips, white teeth | 1600x1859 |
-| maps-03.jpg | Darine Ali (visitor) | Mar 2023 | Reception desk with her logo, wood panelling | 1024x768 |
-| maps-04.jpg | Mona Itani (visitor) | Apr 2025 | Reception desk with logo, close view | 1600x2133 |
-| maps-05.jpg | Dr.ghina yassine clinic (owner) | Apr 2023 | Rubik building exterior and entrance collage | 1125x1118 |
-| maps-06.jpg | Dr.ghina yassine clinic (owner) | Apr 2025 | Portrait of a woman in green scrubs in a treatment room (presumably Dr. Ghina) | 1600x2400 |
-| maps-07.jpg | Dr.ghina yassine clinic (owner) | Apr 2025 | Portrait of the same woman in coral scrubs (presumably Dr. Ghina) | 1600x2400 |
-| maps-08.jpg | Lina Badran (visitor) | Apr 2025 | Close-up of a patient's smile with sugar on lips | 1600x1066 |
-| maps-09.jpg | Dr.ghina yassine clinic (owner) | Mar 2023 | Styled smile shot, red lips | 1600x1859 |
-| owner-profile-photo.jpg | Dr.ghina yassine clinic (owner) | n/a | Logo: gold tooth/implant mark, "Dr. Ghina Yassine", "Dental and Facial Esthetics" | 1024x1024 |
+| maps-07.jpg | Maps, clinic account | doctor portrait | Woman in coral scrubs, peach wall, banana leaves; professional shoot | **Use** → `dr-ghina-portrait-coral` (hero) |
+| maps-06.jpg | Maps, clinic account | doctor portrait / treatment room | Same woman in lime scrubs on the dental chair, intraoral scanner, playful tooth pin | **Use** → `dr-ghina-portrait-treatment-room` (about, or kids section) |
+| maps-03.jpg | Maps, Darine Ali (visitor) | reception | Frosted glass desk with gold logo, oak cabinets, sunflowers | **Use** → `reception` (anxious patients section, gallery) |
+| maps-04.jpg | Maps, Mona Itani (visitor) | reception | Desk close-up; also a sign with the **Wi-Fi name and password**, a third-party water flosser display, a cardboard cutout of Dr. Ghina, QR codes | **Use cropped only** → `reception-desk-logo` (optional gallery detail) |
+| maps-05.jpg | Maps, clinic account | exterior | Rubik building collage (tower, green wall sign, lobby); looks like the developer's marketing image | **Use cropped** (tower only) → `building-exterior` (location) |
+| maps-01.jpg | Maps, clinic account | before/after (result only) | Macro of smooth, even front teeth on black | **Use, consent-gated** → `smile-closeup` |
+| maps-02.jpg | Maps, clinic account | before/after (result only) | Editorial smile shot, deep red lips | Processed → `smile-red-lips`; **not planned** (tone) |
+| maps-09.jpg | Maps, clinic account | before/after (result only) | Editorial smile shot, deep red lips, compressed | Processed → `smile-red-lips-2`; **not planned** (tone) |
+| maps-08.jpg | Maps, Lina Badran (visitor) | before/after (result only) | Patient's lower face, smile with sugar crystals on lips | **Excluded**: not from her own posts |
+| owner-profile-photo.jpg | Maps, clinic account | logo | Her logo | Processed as the logo (duplicate of the next row) |
+| logo/logo-from-google-profile.jpg | copy of the above | logo | Gold mark, script name, "DENTAL AND FACIAL ESTHETICS" | **Use** → `public/brand/*` |
 
-Contributor names, profile links and avatar URLs are in `data/photo-attributions.json` for
-on-site credit lines.
+No Instagram images exist yet. No stock images were used.
+
+Supporting evidence that the portraits show Dr. Ghina: both were uploaded by the clinic's own
+Google account, and a life-size cardboard cutout of the same woman stands on the reception
+desk in maps-04. Still marked "confirm" until she says so.
+
+### Image plan by section
+
+| Section | Image | Notes |
+| --- | --- | --- |
+| Hero | `dr-ghina-portrait-coral` | Warm peach and green, matches the palette |
+| About Dr. Ghina | `dr-ghina-portrait-treatment-room` | Shows her at work, relaxed |
+| For anxious patients | `reception` | "Calm space" visual: oak, sunflowers, soft light |
+| For kids | none yet (or `dr-ghina-portrait-treatment-room` if About uses the coral one) | The tooth pin reads as kid-friendly. No photos of children exist, and none will be invented |
+| Clinic gallery | `reception`, `reception-desk-logo`, `dr-ghina-portrait-treatment-room` | Thin: only 2 real interior photos. Instagram would fix this |
+| Services | `smile-closeup` (optional) | Only if you are comfortable showing a patient's teeth before consent is confirmed; otherwise icons only |
+| Hours and location | `building-exterior` | Card size only (low resolution) |
+| Header, footer, favicon | `public/brand/logo.svg`, `logo-light.svg`, `src/app/icon.png` | |
+
+Every Maps photo carries a credit line on the site, e.g. "Photo: Darine Ali, Google Maps"
+(stored per image in `data/assets.json` → `attribution`).
+
+### Logo
+
+Source: the clinic's Google profile photo, a 1024px JPEG on white. Outputs in `public/brand/`:
+
+- `logo.svg`: vector trace. Gold and ink were separated by colour and traced with potrace at
+  4x; the four-point sparkle, which overlaps the tooth in the same gold, was redrawn as a
+  vector from measurements so its points stay sharp. Gold gradient uses colours sampled from
+  the original.
+- `logo-light.svg`: wordmark in cream for dark backgrounds (footer).
+- `logo-mark.svg`: gold tooth and implant mark only.
+- `logo-1200.png`, `logo-600.png`, `logo-300.png`: transparent PNGs rendered from the SVG.
+- `logo-mark-512.png`, `logo-mark-192.png`; `src/app/icon.png` and `src/app/apple-icon.png`
+  (gold mark on a cream tile; Next.js picks these up as favicon and touch icon).
+
+It is a cleanup of a raster, not her designer's file: stroke edges are slightly less smooth
+than the original at very large sizes. Fine for the demo; ask her for the vector original.
+
+### Proposed palette (full detail in `data/design-tokens.json`)
+
+Soft warm neutrals from the clinic itself (cream walls, oak, stone floor) and one accent: the
+honey gold of her logo, which also matches the oak in reception. No clinical blue.
+
+| Token | Hex | Use |
+| --- | --- | --- |
+| bg (cream) | `#FBF7F1` | Page background |
+| surface (porcelain) | `#FFFDF9` | Cards, fields, header |
+| sand | `#F3EADF` | Alternate sections |
+| line (linen) | `#E6DACB` | Borders |
+| text (espresso) | `#2A221D` | Headings, body |
+| muted (taupe) | `#6B5E54` | Secondary text |
+| accent (honey gold) | `#C9A15A` | Primary buttons with espresso text, stars, icons. Never text on light |
+| accentHover | `#BE9550` | Button hover |
+| accentStrong (bronze) | `#76522A` | Links, small accent text, focus ring |
+| accentSoft (gold tint) | `#F1E4C8` | Badges, chips |
+| dark (walnut) | `#2E241E` | Footer |
+| darkMuted (oat) | `#CDBFB0` | Secondary text on walnut |
+
+All text pairs pass WCAG AA (body text 14.6:1, muted 5.9:1, bronze links 6.5:1, button text
+on gold 6.5:1). Typography proposal: Fraunces (soft serif) for headings, DM Sans for body.
+
+### Services (from `data/services.json`)
+
+Confirmed by her own branding or her patients' reviews:
+
+1. **Dental esthetics**: her logo and reception sign say "Dental and Facial Esthetics"; her
+   account posted smile close-ups. Which treatments: `[CONFIRM]`.
+2. **Facial esthetics**: same source. Which treatments: `[CONFIRM]`.
+3. **Dental care for children, including toddlers**: Maryam Ab's review.
+4. **Dental care for adults**: dental clinic listing; reviews mention treatments and a
+   "dental care journey". Which treatments: `[CONFIRM]`.
+
+Approach points from reviews (for the anxious patients and kids sections): listens and takes
+time, knows when to pause, punctual and never rushed, explains everything, gentle with
+children, soothing background music, clean and hygienic, warm welcome.
+
+Everything else stays a placeholder: check-ups and cleaning, fillings, root canal, crowns and
+bridges, implants (the logo mark shows an implant, which is not proof she places them),
+orthodontics or aligners, whitening, veneers, emergency appointments.
 
 ---
 
 ## Assets used
 
-None on the site yet (site not built). Candidates are listed above.
+Nothing is on the page yet (Phase 2 builds it). Processed and ready:
+
+| Output (`public/images/`) | From | Planned section | Credit shown |
+| --- | --- | --- | --- |
+| `dr-ghina-portrait-coral` (1600x2400) | maps-07.jpg | Hero | Photo: Dr.ghina yassine clinic, Google Maps |
+| `dr-ghina-portrait-treatment-room` (1600x2400) | maps-06.jpg | About | Photo: Dr.ghina yassine clinic, Google Maps |
+| `reception` (1024x768) | maps-03.jpg | Anxious patients, gallery | Photo: Darine Ali, Google Maps |
+| `reception-desk-logo` (1200x800, cropped) | maps-04.jpg | Gallery (optional) | Photo: Mona Itani, Google Maps |
+| `building-exterior` (548x1104, cropped) | maps-05.jpg | Location | Photo: Dr.ghina yassine clinic, Google Maps |
+| `smile-closeup` (1600x900) | maps-01.jpg | Services (optional, consent-gated) | Photo: Dr.ghina yassine clinic, Google Maps |
+| `smile-red-lips` (1600x1859) | maps-02.jpg | Not planned | Photo: Dr.ghina yassine clinic, Google Maps |
+| `smile-red-lips-2` (1600x1859) | maps-09.jpg | Not planned | Photo: Dr.ghina yassine clinic, Google Maps |
+| `public/brand/*` | logo-from-google-profile.jpg | Header, footer, icons | n/a (her logo) |
 
 ---
 
 ## Placeholders
 
-No `[CONFIRM]` markers in the code yet (the site is not built). Items already known to need
-placeholders once Phase 2 starts:
+No site copy exists yet. `[CONFIRM]` items recorded so far:
 
-- Services list (only "Dental and Facial Esthetics" from the logo; reviews mention kids'
-  care and general visits but no named treatments)
-- What "facial esthetics" includes
-- Dr. Ghina's training, degrees, years in practice, memberships
-- Team member names and roles
+| Item | Where |
+| --- | --- |
+| Which dental esthetics treatments | `data/services.json` → `confirmed[dental-esthetics].unknown` |
+| Which facial esthetics treatments | `data/services.json` → `confirmed[facial-esthetics].unknown` |
+| Kids: from what age, which treatments | `data/services.json` → `confirmed[kids].unknown` |
+| Which general treatments | `data/services.json` → `confirmed[general].unknown` |
+| Check-ups/cleaning, fillings, root canal, crowns/bridges, implants, orthodontics/aligners, whitening, veneers, emergencies | `data/services.json` → `placeholders` |
+| Portraits are Dr. Ghina | `data/assets.json` → flags on both portraits |
+| Dr. Ghina's training, degrees, years in practice, memberships | Phase 2 About section |
+| Team names and roles | Phase 2 (none will be shown) |
 
 ---
 
 ## Deferred / not done
 
-- **Places API route not used**: you could not create a key. `npm run fetch:maps` is ready
-  if one is created later; it would replace the browser data with official API data.
-- **Reviews capped at 5**: signed out, Google Maps shows only the 5 "most relevant" reviews.
-  Sorting, topic filters and loading more open a "Sign in to read every review" prompt. I did
-  not sign in or work around it. The API has the same 5 review cap. The 1-star review exists
-  but is not among the 5 shown, so its content is unknown. If more reviews are wanted, they
-  can be copied verbatim from a signed-in browser into a manual file, with your sign off.
-- **"Limited view"**: Google serves this signed-out headless browser a reduced Maps page.
-  Many page loads had no Reviews tab at all; the script retries up to 4 times. Google Search returned a
-  CAPTCHA ("unusual traffic") for this cloud IP; not attempted further.
-- **Instagram not read**: `www.instagram.com/dr.ghinayassine/` redirects every signed-out
-  visitor from this environment to the login page. Not worked around. Instagram images and
-  captions need to be saved manually into `assets-raw/instagram/`.
-- **Network quirk**: in this cloud environment Node's built-in `fetch` goes through a separate
-  allowlist that still blocks `lh3.googleusercontent.com`, so the browser script downloads
-  photos through the browser session instead. No effect on a normal machine.
-- **Google Maps Platform / Maps terms**: Google's terms restrict scraping and long-term
-  storage of Maps content (reviews, photos). This was a one-off read of her own public
-  listing for a demo. For a real launch: use the API with a refresh schedule, or her own
-  photos, and reviews with her permission.
-- **Photos needing consent before any real launch**:
-  - maps-01, maps-02, maps-09 (owner uploads) and maps-08 (visitor upload) show patients'
-    mouths, likely her cosmetic work. Treat like before/after: patient consent needed.
-  - maps-06, maps-07: presumed to be Dr. Ghina (uploaded by the clinic account). Confirm
-    before captioning them as her.
-  - maps-03, maps-04, maps-08 are visitor photos: must carry the contributor credit.
-- **npm audit**: 5 "high" advisories, all inside the ESLint toolchain
-  (`eslint-config-next` → `fast-glob` → `micromatch`). Dev only, not shipped. Left as is.
-- Not in scope for this demo (logged so they are not forgotten): Arabic and French versions,
-  a real booking backend, before/after consent, Vercel deployment (Phase 3), Lighthouse pass
-  (Phase 3).
+- **Instagram**: not read (login wall from this environment). No Instagram images or
+  captions, so the gallery is thin and services are mostly placeholders. Dropping images and
+  `captions.txt` into `assets-raw/instagram/` and re-running Phase 1 steps would fill this.
+- **Places API route not used** (no key). `npm run fetch:maps` is ready if a key appears.
+- **Reviews capped at 5**: Google shows signed-out visitors 5 reviews; the rest need sign-in.
+  Not worked around. The 1-star review's content is unknown.
+- **Google terms**: scraping and long-term storage of Maps content is restricted. One-off read
+  of her own listing for a demo. For launch: her own original photo files, reviews via the
+  API or with permission.
+- **Consent before any real launch**:
+  - `smile-closeup`, `smile-red-lips`, `smile-red-lips-2` show patients' teeth (her uploads).
+  - Portraits: confirm they are her and she is happy to use them.
+  - `building-exterior` looks like the building developer's marketing photo: confirm use.
+  - Visitor photos (`reception`, `reception-desk-logo`) keep their contributor credit.
+- **maps-08 excluded**: before/after-type image uploaded by a visitor, not by her.
+- **maps-04 uncropped not used**: it shows the clinic Wi-Fi password and a third-party
+  product display. Only a desk crop is used.
+- **Reception sign missing a letter**: the physical desk sign in maps-04 reads "D NTA AND
+  FACIAL ESTHETICS". That close-up is kept small/optional so the demo does not spotlight it.
+- **Red-lips smile shots not planned**: dramatic editorial tone clashes with the calm
+  direction. Processed in case you want a "smile results" strip.
+- **Logo is a trace**, not her vector original.
+- **Kids section has no image of children** and none will be created. Uses icons or her
+  portrait.
+- **npm audit**: 10 advisories, all in dev tooling, none shipped to the browser: 5 high in the
+  ESLint chain (`eslint-config-next` → `fast-glob` → `micromatch` → `braces`) and 5 moderate
+  in potrace's old `jimp` (its `phin` HTTP client; the logo script only passes local
+  buffers). Left as is.
+- Not in scope for this demo: Arabic and French versions, a real booking backend, Vercel
+  deployment (Phase 3), Lighthouse pass (Phase 3).
 
 ---
 
 ## Questions for the client
 
-- Which services do you offer? (general, pediatric, cleaning, whitening, fillings, root canal,
-  crowns, veneers, implants, orthodontics or aligners, emergency visits: which ones, and
-  anything else?)
+- Which services do you offer? (check-ups, cleaning, fillings, root canal, crowns, veneers,
+  whitening, implants, orthodontics or aligners, emergency visits, anything else?)
 - Your logo says "Dental and Facial Esthetics": which facial treatments do you offer?
+- For children: from what age do you see them? Anything special you do for little ones?
 - Do you want prices on the site, or "contact us for pricing"?
 - What should the "About" section say: where you trained, degrees, years in practice,
   memberships?
 - Are the two portraits on your Google listing of you? May we use them?
 - Team: who works with you, and do they want to be named or pictured?
 - Photos: may we use your Instagram and Google Maps photos? Any you would rather we did not?
+  Do you have more photos of the clinic (treatment room, waiting area)?
 - Smile close-ups and before/after photos: do you have written patient consent to publish
   them on a website?
-- Do you have the logo as a vector file (SVG, AI, PDF) or a high resolution PNG?
+- The Rubik building photo: is it yours to use, or the developer's?
+- Do you have the logo as a vector file (SVG, AI, PDF) from your designer?
 - Booking: is WhatsApp the preferred channel? Who answers it?
 - Do you want Arabic and/or French versions?
 - Domain: do you own one already? Preferred name?

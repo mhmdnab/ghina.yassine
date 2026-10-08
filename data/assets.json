@@ -1,0 +1,313 @@
+{
+  "note": "Hand-curated. `npm run process:images` fills `attribution` and `outputs` for every entry in `images`.",
+  "images": [
+    {
+      "id": "dr-ghina-portrait-coral",
+      "source": "maps",
+      "sourceFile": "assets-raw/maps/maps-07.jpg",
+      "category": "doctor portrait",
+      "description": "Professional portrait of a smiling woman in coral scrubs leaning on a white chair, soft peach wall and banana leaves behind. Uploaded by the clinic's own Google account; presumed to be Dr. Ghina.",
+      "suggestedSection": "hero",
+      "alt": "Dr. Ghina Yassine smiling in coral scrubs, with soft green leaves behind her",
+      "crop": null,
+      "flags": [
+        "confirm this is Dr. Ghina before launch"
+      ],
+      "outputs": {
+        "full": {
+          "src": "/images/dr-ghina-portrait-coral.webp",
+          "width": 1600,
+          "height": 2400
+        },
+        "card": {
+          "src": "/images/dr-ghina-portrait-coral-card.webp",
+          "width": 720,
+          "height": 1080
+        },
+        "blurDataURL": "data:image/webp;base64,UklGRpIAAABXRUJQVlA4IIYAAACwBACdASoMABIAPu1iqU2ppaOiMAgBMB2JbACdMoRwAdCU+4CHlTNdjkBdIFzAAP5AabfnhQ3aNJi5TzrEVoJ8rGubAEgpGi+OwMVVx3obEOvZYBR9R8dLtLBA6XkoTOJaTxkNqKff2LKLGw9z0kRiQDGZma9UpTy7YePEWWIsyaPGG6QAAA=="
+      },
+      "attribution": {
+        "required": true,
+        "text": "Photo: Dr.ghina yassine clinic, Google Maps",
+        "displayName": "Dr.ghina yassine clinic",
+        "uri": "https://maps.google.com/maps/contrib/109920455778408273806"
+      }
+    },
+    {
+      "id": "dr-ghina-portrait-treatment-room",
+      "source": "maps",
+      "sourceFile": "assets-raw/maps/maps-06.jpg",
+      "category": "doctor portrait",
+      "description": "Professional portrait of the same woman in lime scrubs in a treatment room, leaning on the dental chair beside an intraoral scanner, with a playful tooth pin on her top. Uploaded by the clinic's own Google account.",
+      "suggestedSection": "about",
+      "alt": "Dr. Ghina Yassine smiling in her treatment room, resting on the dental chair",
+      "crop": null,
+      "flags": [
+        "confirm this is Dr. Ghina before launch"
+      ],
+      "outputs": {
+        "full": {
+          "src": "/images/dr-ghina-portrait-treatment-room.webp",
+          "width": 1600,
+          "height": 2400
+        },
+        "card": {
+          "src": "/images/dr-ghina-portrait-treatment-room-card.webp",
+          "width": 720,
+          "height": 1080
+        },
+        "blurDataURL": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAABwBACdASoMABIAPu1iqU2ppaOiMAgBMB2JaACdIExC4EJb3hCLq/5OS9+cAAD+sW6X6lxO5v8GgVUuuuJ/f3mx3wsX5NmEWvasEhHda9VNUOdqJinFW7ZygzeQgXCan+aSXNo4IhQZfRFs8qUsCM3bP/CNXmZgVPh3D8kPwXlo0LNATCsE76JwUXXUAAAA"
+      },
+      "attribution": {
+        "required": true,
+        "text": "Photo: Dr.ghina yassine clinic, Google Maps",
+        "displayName": "Dr.ghina yassine clinic",
+        "uri": "https://maps.google.com/maps/contrib/109920455778408273806"
+      }
+    },
+    {
+      "id": "reception",
+      "source": "maps",
+      "sourceFile": "assets-raw/maps/maps-03.jpg",
+      "category": "reception",
+      "description": "Reception area: frosted glass desk with the gold Dr. Ghina Yassine logo, warm oak cabinets, sunflowers, small figurines, a bright room through the doorway.",
+      "suggestedSection": "anxious patients (calm space) and gallery",
+      "alt": "The clinic reception, with a frosted glass desk bearing the Dr. Ghina Yassine logo, warm oak cabinets and sunflowers",
+      "crop": null,
+      "flags": [
+        "visitor photo: show contributor credit"
+      ],
+      "outputs": {
+        "full": {
+          "src": "/images/reception.webp",
+          "width": 1024,
+          "height": 768
+        },
+        "card": {
+          "src": "/images/reception-card.webp",
+          "width": 720,
+          "height": 540
+        },
+        "blurDataURL": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAACwAQCdASoMAAkAA4BaJbACdACEsWIAAPysYwLnZxDUuo7kYtDVmJfWAw5xmjo53B/WzolisnKD9+V5osjikCyIb4aVvQ79YAA="
+      },
+      "attribution": {
+        "required": true,
+        "text": "Photo: Darine Ali, Google Maps",
+        "displayName": "Darine Ali",
+        "uri": "https://maps.google.com/maps/contrib/117204959392356023471"
+      }
+    },
+    {
+      "id": "reception-desk-logo",
+      "source": "maps",
+      "sourceFile": "assets-raw/maps/maps-04.jpg",
+      "category": "reception",
+      "description": "Close view of the reception desk front with the logo in gold and black, and a small lamp. Cropped from a visitor photo: the uncropped photo shows the clinic Wi-Fi network and password on a sign, and a third-party product display. The physical sign is missing the first E of DENTAL.",
+      "suggestedSection": "gallery (optional detail; the sign's missing letter is visible up close)",
+      "alt": "Close view of the reception desk with the gold and black Dr. Ghina Yassine logo",
+      "crop": {
+        "left": 314,
+        "top": 1024,
+        "width": 1200,
+        "height": 800
+      },
+      "flags": [
+        "visitor photo: show contributor credit",
+        "cropped to hide Wi-Fi password and third-party product display",
+        "sign is missing a letter: do not feature large"
+      ],
+      "outputs": {
+        "full": {
+          "src": "/images/reception-desk-logo.webp",
+          "width": 1200,
+          "height": 800
+        },
+        "card": {
+          "src": "/images/reception-desk-logo-card.webp",
+          "width": 720,
+          "height": 480
+        },
+        "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADQAQCdASoMAAgAA4BaJQBOgB6QCnQVyAD6CXlPLGzPLVIzFMCVcl29qzpF1AyDCJ5O1lEp9O8CdAAA"
+      },
+      "attribution": {
+        "required": true,
+        "text": "Photo: Mona Itani, Google Maps",
+        "displayName": "Mona Itani",
+        "uri": "https://maps.google.com/maps/contrib/110635830460360236960"
+      }
+    },
+    {
+      "id": "building-exterior",
+      "source": "maps",
+      "sourceFile": "assets-raw/maps/maps-05.jpg",
+      "category": "exterior",
+      "description": "The Rubik building, a white residential and office tower in Achrafieh. Cropped from a three-panel collage (exterior, green wall with building sign, lobby) that looks like the building developer's marketing image. Low resolution.",
+      "suggestedSection": "hours and location",
+      "alt": "The white Rubik building in Achrafieh, where the clinic is on the 5th floor",
+      "crop": {
+        "left": 8,
+        "top": 8,
+        "width": 548,
+        "height": 1104
+      },
+      "flags": [
+        "likely the building developer's photo: confirm she may use it",
+        "low resolution: card size only"
+      ],
+      "outputs": {
+        "full": {
+          "src": "/images/building-exterior.webp",
+          "width": 548,
+          "height": 1104
+        },
+        "card": {
+          "src": "/images/building-exterior-card.webp",
+          "width": 548,
+          "height": 1104
+        },
+        "blurDataURL": "data:image/webp;base64,UklGRqYAAABXRUJQVlA4IJoAAACQBACdASoMABgAPu1iqU2ppaOiMAgBMB2JZgC7LwAVeaztRy/vzLI/OqKjrgAA/PKIGirPGrQYUQsMQDMdGvic70I9qIVPnJm4oHl618K3nUMuPOTBMmFZjlb4b8BQ/dd9jH7yDyW11GoNLSAM5WF7GmWx3MbWT1nbTneu45ni9o1iaw42fRmG+3lC/QEAXn8R3KLq4pJYAAAA"
+      },
+      "attribution": {
+        "required": true,
+        "text": "Photo: Dr.ghina yassine clinic, Google Maps",
+        "displayName": "Dr.ghina yassine clinic",
+        "uri": "https://maps.google.com/maps/contrib/109920455778408273806"
+      }
+    },
+    {
+      "id": "smile-closeup",
+      "source": "maps",
+      "sourceFile": "assets-raw/maps/maps-01.jpg",
+      "category": "before/after",
+      "description": "Macro close-up of a smile with smooth, even front teeth on a black background. An 'after' result shot (no 'before'), uploaded by the clinic's own account. Treatment type unknown.",
+      "suggestedSection": "services (cosmetic card visual), only after consent is confirmed",
+      "alt": "Close-up of a natural looking smile with smooth, even front teeth",
+      "crop": null,
+      "flags": [
+        "patient case: written consent needed before launch",
+        "from her own upload"
+      ],
+      "outputs": {
+        "full": {
+          "src": "/images/smile-closeup.webp",
+          "width": 1600,
+          "height": 900
+        },
+        "card": {
+          "src": "/images/smile-closeup-card.webp",
+          "width": 720,
+          "height": 405
+        },
+        "blurDataURL": "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAACwAQCdASoMAAcAA4BaJYwAAt0KYjp4APvsX3qjEOiCBllHs/s2gpN/P8hffjV8+o9XYgvUbHBsAAAA"
+      },
+      "attribution": {
+        "required": true,
+        "text": "Photo: Dr.ghina yassine clinic, Google Maps",
+        "displayName": "Dr.ghina yassine clinic",
+        "uri": "https://maps.google.com/maps/contrib/109920455778408273806"
+      }
+    },
+    {
+      "id": "smile-red-lips",
+      "source": "maps",
+      "sourceFile": "assets-raw/maps/maps-02.jpg",
+      "category": "before/after",
+      "description": "Styled editorial smile shot: bright white front teeth framed by deep red textured lips with water droplets. 'After' result shot, uploaded by the clinic's own account. Small partial watermark stroke at the right edge.",
+      "suggestedSection": "not planned (dramatic tone clashes with the calm direction); optional smile results strip",
+      "alt": "Styled close-up of a bright smile framed by deep red lips",
+      "crop": null,
+      "flags": [
+        "patient case: written consent needed before launch",
+        "from her own upload"
+      ],
+      "outputs": {
+        "full": {
+          "src": "/images/smile-red-lips.webp",
+          "width": 1600,
+          "height": 1859
+        },
+        "card": {
+          "src": "/images/smile-red-lips-card.webp",
+          "width": 720,
+          "height": 837
+        },
+        "blurDataURL": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAACQAQCdASoMAA4AA4BaJbACdAEOhLAA/u7rmDPXZT7fbT5slxTupVQMzausVQXGlIuaZ+GIb7wEOesml8Zg3gI57p5yyP6nBa27pMIAAAA="
+      },
+      "attribution": {
+        "required": true,
+        "text": "Photo: Dr.ghina yassine clinic, Google Maps",
+        "displayName": "Dr.ghina yassine clinic",
+        "uri": "https://maps.google.com/maps/contrib/109920455778408273806"
+      }
+    },
+    {
+      "id": "smile-red-lips-2",
+      "source": "maps",
+      "sourceFile": "assets-raw/maps/maps-09.jpg",
+      "category": "before/after",
+      "description": "Second styled editorial smile shot with deep red lips, front view. 'After' result shot, uploaded by the clinic's own account. Visible compression.",
+      "suggestedSection": "not planned (dramatic tone); optional smile results strip",
+      "alt": "Styled front view of a smile framed by deep red lips",
+      "crop": null,
+      "flags": [
+        "patient case: written consent needed before launch",
+        "from her own upload"
+      ],
+      "outputs": {
+        "full": {
+          "src": "/images/smile-red-lips-2.webp",
+          "width": 1600,
+          "height": 1859
+        },
+        "card": {
+          "src": "/images/smile-red-lips-2-card.webp",
+          "width": 720,
+          "height": 837
+        },
+        "blurDataURL": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoMAA4AA4BaJbACdAEf2+rf4AAA/uRNNstlewCQfOy0XWcP+AuNBrxTt/pnvDlkWunPkMVS333f4y+CE5e9+oGszngAAA=="
+      },
+      "attribution": {
+        "required": true,
+        "text": "Photo: Dr.ghina yassine clinic, Google Maps",
+        "displayName": "Dr.ghina yassine clinic",
+        "uri": "https://maps.google.com/maps/contrib/109920455778408273806"
+      }
+    }
+  ],
+  "logo": {
+    "source": "maps",
+    "sourceFile": "assets-raw/logo/logo-from-google-profile.jpg",
+    "category": "logo",
+    "description": "Gold tooth and implant mark with a four-point sparkle, black script 'Dr. Ghina Yassine', small caps 'DENTAL AND FACIAL ESTHETICS'. 1024px JPEG on white, from the clinic's Google profile photo.",
+    "outputs": [
+      "public/brand/logo.svg",
+      "public/brand/logo-light.svg",
+      "public/brand/logo-mark.svg",
+      "public/brand/logo-1200.png",
+      "public/brand/logo-600.png",
+      "public/brand/logo-300.png",
+      "public/brand/logo-mark-512.png",
+      "public/brand/logo-mark-192.png",
+      "src/app/icon.png",
+      "src/app/apple-icon.png"
+    ],
+    "notes": "Traced to SVG with potrace (gold and ink traced separately, sparkle redrawn as a vector). A cleanup of a raster, not her designer's file."
+  },
+  "excluded": [
+    {
+      "sourceFile": "assets-raw/maps/maps-08.jpg",
+      "category": "before/after",
+      "reason": "Close-up of a patient's lower face (smile with sugar crystals on the lips) uploaded by a visitor (Lina Badran), not by the clinic. Rule: before/after only from her own posts."
+    },
+    {
+      "sourceFile": "assets-raw/maps/maps-04.jpg (uncropped)",
+      "category": "reception",
+      "reason": "Shows the clinic Wi-Fi network name and password on a sign and a third-party product display. Only the cropped desk view is used."
+    },
+    {
+      "sourceFile": "assets-raw/maps/owner-profile-photo.jpg",
+      "category": "logo",
+      "reason": "Duplicate of assets-raw/logo/logo-from-google-profile.jpg; processed as the logo."
+    }
+  ]
+}

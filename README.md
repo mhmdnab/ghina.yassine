@@ -12,6 +12,8 @@ npm run build        # production build
 npm run lint
 npm run fetch:maps   # pull Google Maps listing data and photos (needs an API key)
 npm run fetch:maps:browser   # same, from the public listing page (no key)
+npm run process:images       # data/assets.json -> optimized WebP in public/images/
+npm run process:logo         # her logo -> SVG/PNG set in public/brand/ + app icons
 ```
 
 ## Google Maps data

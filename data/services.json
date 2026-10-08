@@ -1,0 +1,63 @@
+{
+  "status": "No Instagram captions or bio were available (assets-raw/instagram/captions.txt not provided). Only what her own branding and her patients' reviews state is listed as confirmed. Everything else is a placeholder to confirm with her.",
+  "confirmed": [
+    {
+      "id": "dental-esthetics",
+      "name": "Dental esthetics",
+      "evidence": [
+        "Her logo and reception sign read \"Dental and Facial Esthetics\".",
+        "The clinic's own Google account posted smile close-up photos (maps-01, maps-02, maps-09)."
+      ],
+      "unknown": "[CONFIRM: which treatments, e.g. veneers, whitening, bonding, smile design]"
+    },
+    {
+      "id": "facial-esthetics",
+      "name": "Facial esthetics",
+      "evidence": ["Her logo and reception sign read \"Dental and Facial Esthetics\"."],
+      "unknown": "[CONFIRM: which facial treatments she offers]"
+    },
+    {
+      "id": "kids",
+      "name": "Dental care for children, including toddlers",
+      "evidence": [
+        "Google review, Maryam Ab: \"My toddler had such a positive experience with her that he still talks about it. [...] she's a perfect dentist for kids!\""
+      ],
+      "unknown": "[CONFIRM: from what age, and which treatments for kids]"
+    },
+    {
+      "id": "general",
+      "name": "Dental care for adults",
+      "evidence": [
+        "Listed on Google Maps as a dental clinic.",
+        "Google reviews describe treatments and a \"dental care journey\" (Alia Al hajj, sawsan h)."
+      ],
+      "unknown": "[CONFIRM: which general treatments, e.g. check-ups, cleaning, fillings, root canal, crowns]"
+    }
+  ],
+  "approach": {
+    "note": "Not services, but documented in her reviews and used for the 'For anxious patients' and 'For kids' sections.",
+    "points": [
+      { "point": "Listens and takes the time to understand", "source": "Karen Ghafary" },
+      { "point": "Knows when to pause and give space", "source": "Karen Ghafary" },
+      { "point": "Punctual, never rushed", "source": "Karen Ghafary" },
+      { "point": "Explains everything clearly", "source": "Karen Ghafary" },
+      { "point": "Gentle; makes children feel completely comfortable", "source": "Maryam Ab" },
+      { "point": "Soothing background music during treatment", "source": "sawsan h" },
+      { "point": "Clean and hygienic clinic, warm welcome", "source": "Alia Al hajj" },
+      { "point": "Makes sure you are comfortable", "source": "ghida kassab" },
+      { "point": "Google review topics: comforting atmosphere, gentle care, clear explanations, cleanliness", "source": "Google Maps review summary" }
+    ]
+  },
+  "placeholders": [
+    "[CONFIRM: check-ups and cleaning]",
+    "[CONFIRM: fillings]",
+    "[CONFIRM: root canal treatment]",
+    "[CONFIRM: crowns and bridges]",
+    "[CONFIRM: implants]  (her logo mark is a tooth with an implant screw, but that is not a statement that she places implants)",
+    "[CONFIRM: orthodontics or clear aligners]",
+    "[CONFIRM: teeth whitening]",
+    "[CONFIRM: veneers]",
+    "[CONFIRM: emergency appointments]"
+  ],
+  "notMentioned": "Prices: one review says \"Prices are fair\" (Karen Ghafary). No prices are known; none will be shown."
+}

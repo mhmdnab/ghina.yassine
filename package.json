@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "fetch:maps": "tsx scripts/fetch-maps.ts",
-    "fetch:maps:browser": "tsx scripts/fetch-maps-browser.ts"
+    "fetch:maps:browser": "tsx scripts/fetch-maps-browser.ts",
+    "process:logo": "tsx scripts/process-logo.ts",
+    "process:images": "tsx scripts/process-images.ts"
   },
   "dependencies": {
     "next": "16.4.0",
@@ -23,6 +25,8 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
     "playwright-core": "^1.56.1",
+    "potrace": "^2.1.8",
+    "sharp": "^0.35.5",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5"

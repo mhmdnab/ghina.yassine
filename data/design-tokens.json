@@ -1,0 +1,52 @@
+{
+  "status": "Proposed in Phase 1, to be wired into src/app/globals.css (Tailwind @theme) in Phase 2.",
+  "direction": "Soft warm neutrals taken from the clinic itself (cream walls, oak cabinets, stone floor) with one accent: the honey gold of her logo, which also matches the oak in the reception. No clinical blue.",
+  "sources": {
+    "logo": { "goldLight": "#E6C87F", "goldMid": "#D5AE61", "goldDark": "#AF7E3B", "ink": "#1A1817" },
+    "reception photo (maps-03)": { "oak": "#B68E55", "oakDeep": "#9F6C29", "stone": "#CAB999" },
+    "reception photo (maps-04)": { "stoneLight": "#CEBEA9", "warmGrey": "#B39E88" },
+    "portrait (maps-07)": { "blush": "#F2CDC5", "peach": "#F1BBAE" },
+    "portrait (maps-06)": { "sage": "#95A286" }
+  },
+  "colors": {
+    "bg": { "value": "#FBF7F1", "name": "cream", "use": "page background" },
+    "surface": { "value": "#FFFDF9", "name": "porcelain", "use": "cards, form fields, header" },
+    "sand": { "value": "#F3EADF", "name": "sand", "use": "alternate section background" },
+    "line": { "value": "#E6DACB", "name": "linen", "use": "borders and dividers (decorative)" },
+    "text": { "value": "#2A221D", "name": "espresso", "use": "headings and body text" },
+    "muted": { "value": "#6B5E54", "name": "taupe", "use": "secondary text, captions" },
+    "accent": { "value": "#C9A15A", "name": "honey gold", "use": "primary buttons (with espresso text), stars, icons, rules. Never as text on light backgrounds." },
+    "accentHover": { "value": "#BE9550", "name": "deep honey", "use": "primary button hover" },
+    "accentStrong": { "value": "#76522A", "name": "bronze", "use": "links, small accent text, focus ring" },
+    "accentSoft": { "value": "#F1E4C8", "name": "gold tint", "use": "badges, chips, soft highlights" },
+    "dark": { "value": "#2E241E", "name": "walnut", "use": "footer background (cream text, gold accents)" },
+    "darkMuted": { "value": "#CDBFB0", "name": "oat", "use": "secondary text on walnut" }
+  },
+  "gradient": {
+    "gold": "linear-gradient(110deg, #E6C87F 0%, #D5AE61 50%, #AF7E3B 100%)",
+    "use": "decorative only (logo mark, thin rules), from the logo's own stops"
+  },
+  "contrast": {
+    "text on bg": 14.63,
+    "text on sand": 13.12,
+    "muted on bg": 5.87,
+    "muted on sand": 5.26,
+    "accentStrong on bg": 6.54,
+    "accentStrong on sand": 5.86,
+    "surface text on accentStrong": 6.87,
+    "text on accent (button)": 6.49,
+    "text on accentHover": 5.65,
+    "accentStrong on accentSoft": 5.54,
+    "cream on dark": 13.48,
+    "darkMuted on dark": 8.42,
+    "accent on dark": 6.29,
+    "note": "WCAG 2.1 contrast ratios. All text pairs pass AA (4.5:1). Gold on cream is 2.25:1, so gold is decorative only on light backgrounds."
+  },
+  "typography": {
+    "proposal": "A soft serif for headings to echo the script logo without copying it (Fraunces), and a warm, very readable sans for body (DM Sans), both via next/font/google.",
+    "headings": "Fraunces, weights 400 to 600, optical size on",
+    "body": "DM Sans, weights 400 and 500, 17px base on desktop, 16px on mobile, line-height 1.65"
+  },
+  "radius": { "card": "20px", "button": "999px", "image": "24px" },
+  "shadow": { "soft": "0 10px 30px -12px rgba(46, 36, 30, 0.18)" }
+}
