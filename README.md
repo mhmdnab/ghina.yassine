@@ -35,9 +35,15 @@ and writes the same files. Signed out, Google shows only the 5 most relevant rev
 
 ## Deploy
 
-Static site for Vercel, no environment variables required. Optional: set
-`NEXT_PUBLIC_SITE_URL` (for example `https://www.example.com`) once there is a real domain,
-so canonical, Open Graph and structured data URLs use it. Without it, Vercel's own URL is used.
+Static site for Vercel, no environment variables required: import the GitHub repo in Vercel
+and deploy (framework is detected as Next.js).
+
+Demo mode (default): the page is `noindex`, so search engines do not list the demo, and
+Vercel's own URL is used for canonical, Open Graph and structured data links.
+
+Launch mode: set `NEXT_PUBLIC_SITE_URL` (for example `https://www.example.com`) to the real
+domain. That switches indexing on, adds the sitemap to robots.txt, and uses the domain in all
+absolute URLs.
 
 ## Folders
 

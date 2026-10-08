@@ -10,3 +10,10 @@ const vercelHost =
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? (vercelHost ? `https://${vercelHost}` : "http://localhost:3000");
+
+/**
+ * Search engines may index the site only once it has its real domain. The demo on a
+ * vercel.app URL is `noindex` so it never competes with her Google listing or shows
+ * `[CONFIRM]` placeholders in search results.
+ */
+export const ALLOW_INDEXING = Boolean(process.env.NEXT_PUBLIC_SITE_URL);

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import { site } from "@/lib/site";
-import { SITE_URL } from "@/lib/site-url";
+import { ALLOW_INDEXING, SITE_URL } from "@/lib/site-url";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -15,6 +15,9 @@ const dmSans = DM_Sans({
   variable: "--font-dm-sans",
   subsets: ["latin"],
   display: "swap",
+  // The headline (Fraunces) is the Largest Contentful Paint; let it have the bandwidth first.
+  // Body text shows in a metric-matched fallback for a moment, so nothing shifts.
+  preload: false,
 });
 
 const title = "Dr. Ghina Yassine | Gentle Dental Clinic in Achrafieh, Beirut";
@@ -27,6 +30,7 @@ export const metadata: Metadata = {
   applicationName: site.clinicName,
   category: "health",
   alternates: { canonical: "/" },
+  robots: ALLOW_INDEXING ? undefined : { index: false, follow: false },
   openGraph: {
     type: "website",
     locale: "en_US",

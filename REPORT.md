@@ -1,9 +1,10 @@
 # REPORT: Dr. Ghina Yassine Dental Clinic demo site
 
-Last updated: 2026-10-08, end of Phase 2.
+Last updated: 2026-10-08, end of Phase 3.
 
-Status: **Phase 2 done: the single-page site is built and runs locally (production build
-passes). Waiting for your go-ahead before Phase 3 (polish, SEO, Lighthouse, Vercel deploy).**
+Status: **Phase 3 polish done and pushed. Vercel deployment NOT done: the connected Vercel
+account is not allowed to create projects (403). One-minute manual import steps are under
+"Deferred / not done"; everything else is ready to deploy as is.**
 
 ---
 
@@ -239,6 +240,64 @@ button showed on phones because `hidden` lost to the button's own display class;
 rating badge overlapped the photo credit at 768px; review avatars failed through the image
 optimizer (now served directly from Google, unoptimized, which also works on Vercel).
 
+### Phase 3: Polish and deploy
+
+- **Responsive check** at 375px, 768px and 1280px after every change: no horizontal
+  scrolling, no console errors, no failed requests.
+- **Animations** (`src/components/RevealOnScroll.tsx`, CSS in `src/app/globals.css`): a calm
+  fade and 18px rise as sections, cards and steps enter the screen (0.8s, small staggers on
+  card rows). Tested three ways: normal (off-screen elements start hidden and appear on
+  scroll), `prefers-reduced-motion: reduce` (everything visible immediately, no movement), and
+  JavaScript disabled (everything visible). The hero is never animated so the first paint is
+  not delayed. Hidden elements are hidden instantly at load and only transition on the way in.
+- **SEO** (`src/app/layout.tsx`): title, meta description, canonical, Open Graph and Twitter
+  card tags, theme color. `src/app/opengraph-image.jpg` and `twitter-image.jpg` (1200x630,
+  with alt text): logo, headline, "4.9 on Google, 54 reviews", her coral portrait in the
+  arch, and the photo's Google Maps credit. Rendered from HTML with the site's own fonts by
+  `npm run make:og` (`scripts/make-og-image.ts`). `robots.txt` and `sitemap.xml`.
+- **Structured data** (`src/components/StructuredData.tsx`): `Dentist` JSON-LD with name,
+  alternate name, URL, logo, images, phone, address, coordinates, map link, opening hours
+  (Monday to Saturday 08:00 to 20:00, derived from `data/place.json`), Instagram and Maps as
+  `sameAs`. No `aggregateRating`: Google does not allow businesses to mark up reviews about
+  themselves for star rich results, so the rating stays visible on the page only.
+- **Demo mode is `noindex`** (`src/lib/site-url.ts`): with no `NEXT_PUBLIC_SITE_URL` set, the
+  page carries `noindex, nofollow` so the demo never shows up in search next to her real
+  listing, with `[CONFIRM]` markers. Setting `NEXT_PUBLIC_SITE_URL` to her real domain at
+  launch switches indexing on and adds the sitemap to robots.txt.
+- **Accessibility**: every image has alt text (decorative ones are empty and hidden),
+  visible focus ring on everything focusable (2px bronze, 6.5:1 on cream), skip link, labelled
+  form fields with inline errors, unique navigation labels, all text pairs WCAG AA (see the
+  palette table). Lighthouse accessibility: 100.
+- **Performance fixes** (first Lighthouse mobile run was 75):
+  - Heading font loaded without extra variable axes: preloaded fonts 307 KB to 118 KB.
+  - CSS inlined (`experimental.inlineCss`, recommended by Next.js for Tailwind): no
+    render-blocking stylesheet request.
+  - Logo SVG coordinates rounded (invisible change): 51 KB to 27 KB gzipped; the header now
+    uses an optimized PNG of the logo (a few KB).
+  - Hero photo no longer requested at high priority (on phones it sits below the headline,
+    which is the Largest Contentful Paint).
+  - Body font no longer preloaded, so the headline font arrives first; metric-matched
+    fallback keeps layout shift at 0.
+
+**Lighthouse** (v13.5, local production build, `next start`):
+
+| Run | Performance | Accessibility | Best practices | SEO |
+| --- | --- | --- | --- | --- |
+| Mobile, before fixes | 75 | 100 | 100 | 100 |
+| Mobile, final, launch mode (3 runs) | 95, 96, 94 | 100 | 100 | 100 |
+| Desktop, launch mode | 100 | 100 | 100 | 100 |
+| Mobile, demo mode (`noindex`) | 91 to 96 | 100 | 100 | 69 |
+
+Final mobile metrics: First Contentful Paint 1.2s, Largest Contentful Paint 2.8 to 3.1s,
+Total Blocking Time 50ms, Cumulative Layout Shift 0. The demo-mode SEO score is below 90 only
+because of "Page is blocked from indexing", which is the deliberate `noindex` above; every
+other SEO check passes. Reports: run `lighthouse` against `npm run build && npm start`.
+
+- **Deploy**: attempted through the Vercel connection (team `moeseccs-projects`). Both
+  creating a project linked to `mhmdnab/ghina.yassine` and a direct deployment returned
+  `403 forbidden: You don't have permission to create a project`. No Vercel CLI token exists
+  in this environment. Not deployed; see Deferred for the manual steps.
+
 ---
 
 ## Assets used
@@ -257,6 +316,7 @@ optimizer (now served directly from Google, unoptimized, which also works on Ver
 | `src/app/icon.png`, `apple-icon.png` | same (mark only) | Browser tab, home screen | n/a |
 | Review author photos | Google profile photos, hotlinked from `lh3.googleusercontent.com` | Review cards (5) | Author name links to their Google profile |
 | Map | Google Maps embed (no key) | Hours and location | Google's own attribution inside the map |
+| `src/app/opengraph-image.jpg`, `twitter-image.jpg` | rendered from logo + `dr-ghina-portrait-coral` | Link previews (WhatsApp, social) | "Photo: Dr.ghina yassine clinic, Google Maps" printed on the card |
 
 The anxious-patients section uses a review card instead of the reception photo, so no photo
 appears twice on the page. No stock images are used anywhere.
@@ -276,7 +336,7 @@ Visible on the page as dashed `[CONFIRM: ...]` markers (`Confirm` component in
 | `[CONFIRM: from what age, and which treatments]` | Services, children card | `src/components/sections/Services.tsx:32` |
 | `[CONFIRM: which treatments]` | Services, dental esthetics card | `src/components/sections/Services.tsx:38` |
 | `[CONFIRM: which facial treatments]` | Services, facial esthetics card | `src/components/sections/Services.tsx:44` |
-| `[CONFIRM: services list]` (with the list of unconfirmed treatments) | Services, bottom panel | `src/components/sections/Services.tsx:98` |
+| `[CONFIRM: services list]` (with the list of unconfirmed treatments) | Services, bottom panel | `src/components/sections/Services.tsx:99` |
 | `[CONFIRM: from what age she sees children, and what a first visit includes]` | Kids | `src/components/sections/Kids.tsx:64` |
 
 Not shown as markers, still to confirm:
@@ -291,6 +351,27 @@ Not shown as markers, still to confirm:
 ---
 
 ## Deferred / not done
+
+- **Vercel deployment (blocked)**: the Vercel connection can read the team's projects but
+  gets `403` on creating one, so I could not deploy. It takes about a minute by hand:
+  1. Open https://vercel.com/new and import the GitHub repo `mhmdnab/ghina.yassine` into the
+     `moeseccs-projects` team. Name it e.g. `ghina-yassine-demo`. Framework is detected as
+     Next.js; no environment variables needed.
+  2. Deploy. The repo's default branch is `claude/kind-ramanujan-ovzhki`, so this first
+     deploy is a production deploy and gets `https://ghina-yassine-demo.vercel.app`.
+  3. Share that `.vercel.app` URL, not a preview URL: on this team, preview and
+     per-deployment URLs redirect to a Vercel login (checked on `flybeirut-concept-demo`:
+     its `.vercel.app` URL is public, its deployment URL returns 302 to Vercel SSO). A
+     preview link would not open for Dr. Ghina.
+  Alternatively, give the connected Vercel account permission to create projects and I can
+  deploy and verify it myself.
+- **Public GitHub repo**: `mhmdnab/ghina.yassine` is public and contains her photos, the
+  reviewers' names and profile links, and the scraped data files. Consider making it private
+  (Vercel deploys private repos the same way).
+- **Lighthouse on the live URL** not run (no deployment). Local production-build results
+  are above; Vercel's CDN typically matches or beats them.
+- **`experimental.inlineCss`** is an experimental Next.js flag. If a future Next.js upgrade
+  misbehaves, removing it only costs a little first-load speed.
 
 - **Instagram**: not read (login wall from this environment). No Instagram images or
   captions, so the gallery is thin and services are mostly placeholders. Dropping images and
@@ -325,8 +406,6 @@ Not shown as markers, still to confirm:
   summary does state "53 of them five stars", so it is not hidden.
 - **Map embed** uses the classic no-key `maps.google.com/maps?...&output=embed` URL, which
   Google redirects to its current embed. The official Maps Embed API needs a key.
-- **Animations, SEO metadata, Open Graph image, JSON-LD, Lighthouse**: Phase 3. The page has a
-  basic title and description only.
 - **Smooth scrolling** is CSS-only and turns off for `prefers-reduced-motion`.
 - **npm audit**: 10 advisories, all in dev tooling, none shipped to the browser: 5 high in the
   ESLint chain (`eslint-config-next` → `fast-glob` → `micromatch` → `braces`) and 5 moderate
@@ -358,4 +437,5 @@ Not shown as markers, still to confirm:
   format OK, or should it ask for something else (e.g. morning or evening)?
 - Is "Gentle dentistry that doesn't feel scary" a message you are comfortable with?
 - Do you want Arabic and/or French versions?
-- Domain: do you own one already? Preferred name?
+- Domain: do you own one already? Preferred name? (At launch it goes into
+  `NEXT_PUBLIC_SITE_URL`, which also turns search indexing on.)
