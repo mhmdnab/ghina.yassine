@@ -1,9 +1,9 @@
 # REPORT: Dr. Ghina Yassine Dental Clinic demo site
 
-Last updated: 2026-10-08, end of Phase 1.
+Last updated: 2026-10-08, end of Phase 2.
 
-Status: **Phase 1 done with Google Maps assets only (no Instagram yet). Waiting for your
-go-ahead on the image plan and palette before Phase 2.**
+Status: **Phase 2 done: the single-page site is built and runs locally (production build
+passes). Waiting for your go-ahead before Phase 3 (polish, SEO, Lighthouse, Vercel deploy).**
 
 ---
 
@@ -12,7 +12,7 @@ go-ahead on the image plan and palette before Phase 2.**
 ### Phase 0: Setup and asset intake
 
 - Next.js 16.4 (App Router) + TypeScript + Tailwind CSS 4 + ESLint scaffold. Default starter
-  page still in place until Phase 2. `npm run build` passes.
+  page replaced in Phase 2. `npm run build` passes.
 - Folders: `assets-raw/{instagram,logo,maps}/`, `data/`, `scripts/`.
 - `scripts/fetch-maps.ts` (`npm run fetch:maps`): Places API (New) route as specified.
   Tested, but **not run for real: no API key could be created.**
@@ -156,40 +156,137 @@ Everything else stays a placeholder: check-ups and cleaning, fillings, root cana
 bridges, implants (the logo mark shows an implant, which is not proof she places them),
 orthodontics or aligners, whitening, veneers, emergency appointments.
 
+### Phase 2: Build the site
+
+One page (`src/app/page.tsx`), statically prerendered, with a sticky header and smooth-scroll
+anchors. All facts come from `data/` (place facts, hours, rating, reviews, image metadata), so
+nothing is retyped by hand. Fonts: Fraunces (headings) and DM Sans (body) via `next/font`.
+Palette from `data/design-tokens.json` wired into Tailwind in `src/app/globals.css`.
+
+Sections, top to bottom:
+
+1. **Header** (`src/components/Header.tsx`): her traced logo, 7 anchor links (About,
+   Services, Gentle care, Kids, Clinic, Reviews, Visit), Instagram icon, "Book on WhatsApp"
+   button. Turns solid with a soft shadow on scroll. Below 1024px the links move into a menu
+   (Escape closes it, links close it). On phones the header button hides because a floating
+   "Book" button takes over.
+2. **Hero** (`sections/Hero.tsx`): "Gentle dentistry that *doesn't feel scary.*", subtext
+   built from review themes (listens first, explains every step, never rushes), WhatsApp and
+   Call buttons, hours and street, her coral portrait in an arched frame with a thin gold arch,
+   and a "4.9 on Google, 54 reviews" badge linking to her Maps listing. Photo credit below.
+3. **About Dr. Ghina** (`sections/About.tsx`): where the clinic is, what patients describe,
+   five "what her patients notice" points (from reviews), treatment-room portrait with credit,
+   and two visible `[CONFIRM]` markers for credentials.
+4. **Services** (`sections/Services.tsx`): four cards from the confirmed list (adults,
+   children, dental esthetics, facial esthetics), each with its own `[CONFIRM]` marker, plus a
+   dashed "[CONFIRM: services list]" panel naming what is still unknown. Icons only: the smile
+   close-up is behind `SHOW_SMILE_PHOTO = false` until consent is confirmed.
+5. **Gentle care / anxious patients** (`sections/GentleCare.tsx`): "You set the pace." Five
+   what-to-expect steps built from review themes (listens first, every step explained, pauses,
+   on time and never rushed, a calm room with soft music), sawsan h's full review, and Google's
+   review topics with counts (comforting atmosphere 4, gentle care 2, clear explanations 2,
+   cleanliness 2).
+6. **Kids** (`sections/Kids.tsx`): "Gentle visits for little ones", three points (toddlers
+   welcome, gentle first, message ahead on WhatsApp), Maryam Ab's full review, a large faint
+   gold sparkle from the logo, and a `[CONFIRM]` marker for ages and first-visit details.
+7. **Clinic gallery** (`sections/Gallery.tsx`): reception (large), building exterior (tall),
+   front desk crop, and an "More on Instagram" tile. Every photo shows its Google Maps credit.
+8. **Reviews** (`sections/Reviews.tsx`): rating summary (4.9, 54 reviews, 53 of them five
+   stars), Karen Ghafary's review featured large, ghida kassab and Alia Al hajj beside it, and
+   "Read all 54 reviews on Google". Each card: stars, "Google review" label, the exact text,
+   the author's Google photo, name linked to their profile, and relative time.
+9. **Booking** (`sections/Booking.tsx`, `BookingForm.tsx`): name, phone, preferred day (Any
+   day or Monday to Saturday), optional reason. Inline validation (focus moves to the first
+   problem), a live preview of the exact message, and "Continue on WhatsApp", which opens
+   `wa.me/9613698486` with the message prefilled. A fallback link appears in case the popup is
+   blocked. No backend; nothing is sent until the visitor presses send in WhatsApp.
+10. **Hours and location** (`sections/Visit.tsx`, `OpeningHours.tsx`): weekly hours table
+    with today highlighted and an "Open now / Closed now" badge computed in Beirut time in the
+    visitor's browser, address, phone, wheelchair access note (from Google Maps), "Get
+    directions" (Google Maps directions URL with her Place ID), and a Google Maps iframe embed
+    (no API key) that shows her listing card.
+11. **Footer** (`Footer.tsx`): light logo, contact, hours, Instagram and WhatsApp icons,
+    footer nav, a Google Maps source line, and "Demo by Nexlor".
+
+Plus a **floating WhatsApp "Book" button** on phones (`FloatingWhatsApp.tsx`) and a "Skip to
+content" link for keyboard users.
+
+How it was checked:
+
+- `npm run build` (static prerender), `npm run lint` and `tsc` pass.
+- Screenshots at 1280px, 768px and 375px: no horizontal scrolling at any width, no console
+  errors or failed requests.
+- Scripted browser test on a phone viewport: menu opens and closes, header button hidden and
+  floating button shown, empty form shows both errors and focuses the name field, a filled
+  form opens WhatsApp (`api.whatsapp.com/send/?phone=9613698486&text=...`) with this message:
+
+  ```
+  Hello Dr. Ghina, I would like to book an appointment.
+
+  Name: Rana Haddad
+  Phone: +961 70 123 456
+  Preferred day: Saturday
+  Reason for the visit: First visit & a check, please?
+  ```
+- The map embed was checked separately: it renders her listing card (4.9, 54 reviews).
+- Copy check: no em or en dashes in any site copy. The only one on the page is inside Maryam
+  Ab's review ("We highly recommend her – she's a perfect dentist for kids!"), left exactly as
+  she wrote it because review text is never edited.
+
+Bugs found and fixed while testing: Google's hours use a narrow no-break space ("8\u202fAM"),
+which broke the "8:00 AM" formatting and made "Open now" always read "Closed"; the header
+button showed on phones because `hidden` lost to the button's own display class; the hero
+rating badge overlapped the photo credit at 768px; review avatars failed through the image
+optimizer (now served directly from Google, unoptimized, which also works on Vercel).
+
 ---
 
 ## Assets used
 
-Nothing is on the page yet (Phase 2 builds it). Processed and ready:
-
-| Output (`public/images/`) | From | Planned section | Credit shown |
+| Image | From | Where it appears | Credit shown on the page |
 | --- | --- | --- | --- |
-| `dr-ghina-portrait-coral` (1600x2400) | maps-07.jpg | Hero | Photo: Dr.ghina yassine clinic, Google Maps |
-| `dr-ghina-portrait-treatment-room` (1600x2400) | maps-06.jpg | About | Photo: Dr.ghina yassine clinic, Google Maps |
-| `reception` (1024x768) | maps-03.jpg | Anxious patients, gallery | Photo: Darine Ali, Google Maps |
-| `reception-desk-logo` (1200x800, cropped) | maps-04.jpg | Gallery (optional) | Photo: Mona Itani, Google Maps |
-| `building-exterior` (548x1104, cropped) | maps-05.jpg | Location | Photo: Dr.ghina yassine clinic, Google Maps |
-| `smile-closeup` (1600x900) | maps-01.jpg | Services (optional, consent-gated) | Photo: Dr.ghina yassine clinic, Google Maps |
-| `smile-red-lips` (1600x1859) | maps-02.jpg | Not planned | Photo: Dr.ghina yassine clinic, Google Maps |
-| `smile-red-lips-2` (1600x1859) | maps-09.jpg | Not planned | Photo: Dr.ghina yassine clinic, Google Maps |
-| `public/brand/*` | logo-from-google-profile.jpg | Header, footer, icons | n/a (her logo) |
+| `dr-ghina-portrait-coral` | maps-07.jpg (clinic's Google account) | Hero | Photo: Dr.ghina yassine clinic, Google Maps |
+| `dr-ghina-portrait-treatment-room` | maps-06.jpg (clinic's Google account) | About | Photo: Dr.ghina yassine clinic, Google Maps |
+| `reception` | maps-03.jpg (Darine Ali) | Clinic gallery (large) | Photo: Darine Ali, Google Maps |
+| `reception-desk-logo` | maps-04.jpg, cropped (Mona Itani) | Clinic gallery (small) | Photo: Mona Itani, Google Maps |
+| `building-exterior` | maps-05.jpg, cropped (clinic's Google account) | Clinic gallery (tall) | Photo: Dr.ghina yassine clinic, Google Maps |
+| `smile-closeup` | maps-01.jpg (clinic's Google account) | Not shown (`SHOW_SMILE_PHOTO = false` in Services) | Would show its credit |
+| `smile-red-lips`, `smile-red-lips-2` | maps-02.jpg, maps-09.jpg | Not shown | n/a |
+| `public/brand/logo.svg` | traced from her Google profile logo | Header | n/a (her logo) |
+| `public/brand/logo-light.svg` | same | Footer | n/a |
+| `src/app/icon.png`, `apple-icon.png` | same (mark only) | Browser tab, home screen | n/a |
+| Review author photos | Google profile photos, hotlinked from `lh3.googleusercontent.com` | Review cards (5) | Author name links to their Google profile |
+| Map | Google Maps embed (no key) | Hours and location | Google's own attribution inside the map |
+
+The anxious-patients section uses a review card instead of the reception photo, so no photo
+appears twice on the page. No stock images are used anywhere.
 
 ---
 
 ## Placeholders
 
-No site copy exists yet. `[CONFIRM]` items recorded so far:
+Visible on the page as dashed `[CONFIRM: ...]` markers (`Confirm` component in
+`src/components/ui.tsx`). 8 markers in total:
 
-| Item | Where |
+| Marker text | Section | Code |
+| --- | --- | --- |
+| `[CONFIRM: education, degrees and years in practice]` | About | `src/components/sections/About.tsx:74` |
+| `[CONFIRM: professional memberships]` | About | `src/components/sections/About.tsx:75` |
+| `[CONFIRM: which treatments, e.g. check-ups, cleaning, fillings]` | Services, adults card | `src/components/sections/Services.tsx:26` |
+| `[CONFIRM: from what age, and which treatments]` | Services, children card | `src/components/sections/Services.tsx:32` |
+| `[CONFIRM: which treatments]` | Services, dental esthetics card | `src/components/sections/Services.tsx:38` |
+| `[CONFIRM: which facial treatments]` | Services, facial esthetics card | `src/components/sections/Services.tsx:44` |
+| `[CONFIRM: services list]` (with the list of unconfirmed treatments) | Services, bottom panel | `src/components/sections/Services.tsx:98` |
+| `[CONFIRM: from what age she sees children, and what a first visit includes]` | Kids | `src/components/sections/Kids.tsx:64` |
+
+Not shown as markers, still to confirm:
+
+| Item | Where it lives |
 | --- | --- |
-| Which dental esthetics treatments | `data/services.json` → `confirmed[dental-esthetics].unknown` |
-| Which facial esthetics treatments | `data/services.json` → `confirmed[facial-esthetics].unknown` |
-| Kids: from what age, which treatments | `data/services.json` → `confirmed[kids].unknown` |
-| Which general treatments | `data/services.json` → `confirmed[general].unknown` |
-| Check-ups/cleaning, fillings, root canal, crowns/bridges, implants, orthodontics/aligners, whitening, veneers, emergencies | `data/services.json` → `placeholders` |
-| Portraits are Dr. Ghina | `data/assets.json` → flags on both portraits |
-| Dr. Ghina's training, degrees, years in practice, memberships | Phase 2 About section |
-| Team names and roles | Phase 2 (none will be shown) |
+| The two portraits are Dr. Ghina | `data/assets.json` → flags; used in Hero and About |
+| Smile close-up consent | `SHOW_SMILE_PHOTO` in `src/components/sections/Services.tsx:11` |
+| Team names and roles | Not on the page at all (nothing invented) |
+| Full services list | `data/services.json` → `placeholders` |
 
 ---
 
@@ -217,8 +314,20 @@ No site copy exists yet. `[CONFIRM]` items recorded so far:
 - **Red-lips smile shots not planned**: dramatic editorial tone clashes with the calm
   direction. Processed in case you want a "smile results" strip.
 - **Logo is a trace**, not her vector original.
-- **Kids section has no image of children** and none will be created. Uses icons or her
-  portrait.
+- **Kids section has no image of children** and none will be created. It uses icons, a
+  review and a decorative sparkle.
+- **Review details that age**: "8 months ago" / "a year ago" are Google's relative times as
+  of 2026-10-08 and will drift. A real launch should pull reviews fresh (API) or show dates.
+- **Review author photos are hotlinked** from Google. If a reviewer changes their photo the
+  link can break; the card then falls back to an initial only if the URL is missing, not if it
+  404s. Fine for a demo.
+- **The 1-star review is not shown** (it is not among the 5 Google exposes). The rating
+  summary does state "53 of them five stars", so it is not hidden.
+- **Map embed** uses the classic no-key `maps.google.com/maps?...&output=embed` URL, which
+  Google redirects to its current embed. The official Maps Embed API needs a key.
+- **Animations, SEO metadata, Open Graph image, JSON-LD, Lighthouse**: Phase 3. The page has a
+  basic title and description only.
+- **Smooth scrolling** is CSS-only and turns off for `prefers-reduced-motion`.
 - **npm audit**: 10 advisories, all in dev tooling, none shipped to the browser: 5 high in the
   ESLint chain (`eslint-config-next` → `fast-glob` → `micromatch` → `braces`) and 5 moderate
   in potrace's old `jimp` (its `phin` HTTP client; the logo script only passes local
@@ -245,6 +354,8 @@ No site copy exists yet. `[CONFIRM]` items recorded so far:
   them on a website?
 - The Rubik building photo: is it yours to use, or the developer's?
 - Do you have the logo as a vector file (SVG, AI, PDF) from your designer?
-- Booking: is WhatsApp the preferred channel? Who answers it?
+- Booking: is WhatsApp the preferred channel? Who answers it? Is the prefilled message
+  format OK, or should it ask for something else (e.g. morning or evening)?
+- Is "Gentle dentistry that doesn't feel scary" a message you are comfortable with?
 - Do you want Arabic and/or French versions?
 - Domain: do you own one already? Preferred name?
