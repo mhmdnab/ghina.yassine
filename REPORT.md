@@ -2,7 +2,8 @@
 
 Last updated: 2026-10-08, end of Phase 0.
 
-Status: **Phase 0 done. Waiting for the Google Maps API key and Instagram assets before Phase 1.**
+Status: **Phase 0 done. Waiting on Google Maps data (API key or network access for the
+browser route) and Instagram assets before Phase 1.**
 
 ---
 
@@ -75,9 +76,16 @@ placeholders once Phase 2 starts:
 
 ## Deferred / not done
 
-- **Google Maps fetch not run**: waiting for `GOOGLE_MAPS_API_KEY` in `.env.local`. Without
-  it there are no real reviews and no Maps photos, and the Reviews and Gallery sections
-  cannot be built from real content.
+- **Google Maps fetch not run**: no `GOOGLE_MAPS_API_KEY` (you could not create a Places API
+  key). Without real data there are no real reviews and no Maps photos, and the Reviews and
+  Gallery sections cannot be built from real content.
+- **Browser route attempted, blocked**: tried reading her Maps listing and Instagram with
+  the headless Chromium in the cloud container and with the web fetch tool. The
+  environment's network policy denies `www.google.com` and `www.instagram.com` (proxy 403;
+  only `*.googleapis.com` is reachable). Unblocking needs a broader network access level, or
+  these hosts allowed, in the cloud environment settings: `www.google.com`,
+  `consent.google.com`, `*.gstatic.com`, `*.googleusercontent.com`, `*.ggpht.com`,
+  `www.instagram.com`, `*.cdninstagram.com`, `*.fbcdn.net`.
 - **API limit, reviews**: Place Details (New) returns at most **5 reviews** (Google's "most
   relevant" set), not all 54. The site will show those 5 plus a link to all reviews on
   Google. If more are wanted, the option is copying additional reviews verbatim from her
