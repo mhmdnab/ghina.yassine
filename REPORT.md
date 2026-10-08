@@ -108,7 +108,8 @@ Source: the clinic's Google profile photo, a 1024px JPEG on white. Outputs in `p
 - `logo-mark.svg`: gold tooth and implant mark only.
 - `logo-1200.png`, `logo-600.png`, `logo-300.png`: transparent PNGs rendered from the SVG.
 - `logo-mark-512.png`, `logo-mark-192.png`; `src/app/icon.png` and `src/app/apple-icon.png`
-  (gold mark on a cream tile; Next.js picks these up as favicon and touch icon).
+  (gold mark on a cream tile; Next.js picks these up as favicon and touch icon). The
+  scaffold's default Next.js `src/app/favicon.ico` was removed so it cannot override them.
 
 It is a cleanup of a raster, not her designer's file: stroke edges are slightly less smooth
 than the original at very large sizes. Fine for the demo; ask her for the vector original.
