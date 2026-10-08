@@ -1,6 +1,6 @@
 import { Phone } from "lucide-react";
 import { BookingForm } from "@/components/BookingForm";
-import { Container, Eyebrow, Section } from "@/components/ui";
+import { Container, Eyebrow, Section, reveal } from "@/components/ui";
 import { site } from "@/lib/site";
 
 const STEPS = [
@@ -13,7 +13,10 @@ export function Booking() {
   return (
     <Section id="book" tone="sand" labelledBy="book-title">
       <Container>
-        <div className="grid overflow-hidden rounded-[2rem] border border-line bg-surface shadow-lift lg:grid-cols-[0.85fr_1.15fr]">
+        <div
+          className="grid overflow-hidden rounded-[2rem] border border-line bg-surface shadow-lift lg:grid-cols-[0.85fr_1.15fr]"
+          {...reveal()}
+        >
           <div className="relative bg-gradient-to-br from-accent-soft via-sand to-blush/50 p-8 md:p-12">
             <Eyebrow>Book a visit</Eyebrow>
             <h2 id="book-title" className="text-4xl text-ink md:text-5xl">

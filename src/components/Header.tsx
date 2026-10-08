@@ -38,12 +38,12 @@ export function Header() {
       <div className="mx-auto flex h-18 max-w-6xl items-center justify-between gap-4 px-5 sm:px-8">
         <a href="#top" className="shrink-0" aria-label={`${site.name}, ${site.tagline}: back to top`}>
           <Image
-            src="/brand/logo.svg"
+            src="/brand/logo-1200.png"
             alt=""
-            width={3912}
-            height={1452}
-            unoptimized
+            width={1200}
+            height={445}
             loading="eager"
+            sizes="140px"
             className="h-12 w-auto md:h-13"
           />
         </a>
@@ -100,7 +100,7 @@ export function Header() {
 
       <nav
         id="mobile-menu"
-        aria-label="Main"
+        aria-label="Main (mobile)"
         hidden={!open}
         className="border-t border-line bg-surface lg:hidden"
       >

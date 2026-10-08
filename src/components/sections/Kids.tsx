@@ -1,7 +1,7 @@
 import { Baby, Heart, MessageCircleHeart } from "lucide-react";
 import { ReviewCard } from "@/components/ReviewCard";
 import { Sparkle } from "@/components/icons";
-import { Confirm, Container, Eyebrow, Section } from "@/components/ui";
+import { Confirm, Container, Eyebrow, Section, reveal } from "@/components/ui";
 import { reviewBy } from "@/lib/content";
 
 const POINTS = [
@@ -32,11 +32,11 @@ export function Kids() {
         className="pointer-events-none absolute -top-10 right-[-3rem] text-accent/15 md:right-8"
       />
       <Container className="relative grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
-        <div className="order-2 lg:order-1">
+        <div className="order-2 lg:order-1" {...reveal(120)}>
           <ReviewCard review={review} featured />
         </div>
 
-        <div className="order-1 lg:order-2">
+        <div className="order-1 lg:order-2" {...reveal()}>
           <Eyebrow>For kids</Eyebrow>
           <h2 id="kids-title" className="text-4xl text-ink md:text-5xl">
             Gentle visits for little ones

@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { InstagramIcon } from "@/components/icons";
-import { Container, Credit, Eyebrow, Section } from "@/components/ui";
+import { Container, Credit, Eyebrow, Section, reveal } from "@/components/ui";
 import { image, type ImageAsset } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -9,17 +9,19 @@ function GalleryPhoto({
   asset,
   caption,
   sizes,
+  delay = 0,
   className = "",
   imageClassName = "",
 }: {
   asset: ImageAsset;
   caption: string;
   sizes: string;
+  delay?: number;
   className?: string;
   imageClassName?: string;
 }) {
   return (
-    <figure className={`flex flex-col ${className}`}>
+    <figure className={`flex flex-col ${className}`} {...reveal(delay)}>
       <div className="relative flex-1 overflow-hidden rounded-image bg-sand shadow-soft">
         <Image
           src={asset.outputs.full.src}
@@ -44,7 +46,7 @@ export function Gallery() {
   return (
     <Section id="clinic" tone="sand" labelledBy="clinic-title">
       <Container>
-        <div className="max-w-2xl">
+        <div className="max-w-2xl" {...reveal()}>
           <Eyebrow>The clinic</Eyebrow>
           <h2 id="clinic-title" className="text-4xl text-ink md:text-5xl">
             Inside the clinic
@@ -67,6 +69,7 @@ export function Gallery() {
             asset={image("building-exterior")}
             caption="The Rubik Building, Alfred Naccash Street"
             sizes="(min-width: 768px) 33vw, 100vw"
+            delay={120}
             className="md:row-span-2"
             imageClassName="aspect-[4/5] md:aspect-auto object-[50%_30%]"
           />
@@ -74,24 +77,27 @@ export function Gallery() {
             asset={image("reception-desk-logo")}
             caption="Front desk"
             sizes="(min-width: 768px) 33vw, 100vw"
+            delay={80}
             imageClassName="aspect-[3/2]"
           />
-          <a
-            href={site.instagram.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col justify-between rounded-image border border-line bg-gradient-to-br from-blush/60 via-surface to-accent-soft/70 p-7 shadow-soft transition-shadow hover:shadow-lift"
-          >
-            <InstagramIcon size={30} className="text-accent-strong" />
-            <span className="mt-10 block">
-              <span className="block font-display text-2xl text-ink">More on Instagram</span>
-              <span className="mt-1 flex items-center gap-1 text-muted group-hover:text-accent-strong">
-                {site.instagram.handle}
-                <ArrowUpRight size={16} aria-hidden="true" />
+          <div className="flex" {...reveal(160)}>
+            <a
+              href={site.instagram.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-1 flex-col justify-between rounded-image border border-line bg-gradient-to-br from-blush/60 via-surface to-accent-soft/70 p-7 shadow-soft transition-shadow hover:shadow-lift"
+            >
+              <InstagramIcon size={30} className="text-accent-strong" />
+              <span className="mt-10 block">
+                <span className="block font-display text-2xl text-ink">More on Instagram</span>
+                <span className="mt-1 flex items-center gap-1 text-muted group-hover:text-accent-strong">
+                  {site.instagram.handle}
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </span>
               </span>
-            </span>
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          </div>
         </div>
       </Container>
     </Section>

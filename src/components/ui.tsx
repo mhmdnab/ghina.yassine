@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { Sparkle } from "@/components/icons";
 
 export function Container({ children, className = "" }: { children: ReactNode; className?: string }) {
@@ -104,3 +104,11 @@ export const buttonStyles = {
   secondary: `${buttonBase} border border-accent-strong/40 text-accent-strong hover:border-accent-strong hover:bg-accent-soft/60`,
   dark: `${buttonBase} bg-ink text-cream hover:bg-dark`,
 };
+
+/** Props that make an element fade in on scroll, optionally after a short stagger delay. */
+export function reveal(delayMs = 0) {
+  return {
+    "data-reveal": "",
+    style: { "--reveal-delay": `${delayMs}ms` } as CSSProperties,
+  };
+}

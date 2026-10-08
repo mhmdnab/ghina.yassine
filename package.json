@@ -10,7 +10,8 @@
     "fetch:maps": "tsx scripts/fetch-maps.ts",
     "fetch:maps:browser": "tsx scripts/fetch-maps-browser.ts",
     "process:logo": "tsx scripts/process-logo.ts",
-    "process:images": "tsx scripts/process-images.ts"
+    "process:images": "tsx scripts/process-images.ts",
+    "make:og": "tsx scripts/make-og-image.ts"
   },
   "dependencies": {
     "lucide-react": "^1.53.0",

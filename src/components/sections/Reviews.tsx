@@ -1,6 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import { ReviewCard } from "@/components/ReviewCard";
-import { Container, Eyebrow, Section, Stars, buttonStyles } from "@/components/ui";
+import { Container, Eyebrow, Section, Stars, buttonStyles, reveal } from "@/components/ui";
 import { reviewBy } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -12,7 +12,7 @@ export function Reviews() {
   return (
     <Section id="reviews" labelledBy="reviews-title">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
+        <div className="grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end" {...reveal()}>
           <div className="max-w-2xl">
             <Eyebrow>Reviews</Eyebrow>
             <h2 id="reviews-title" className="text-4xl text-ink md:text-5xl">
@@ -35,9 +35,13 @@ export function Reviews() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          <ReviewCard review={reviewBy(FEATURED)} featured className="lg:col-span-2 lg:row-span-2" />
-          {MORE.map((name) => (
-            <ReviewCard key={name} review={reviewBy(name)} />
+          <div className="lg:col-span-2 lg:row-span-2" {...reveal()}>
+            <ReviewCard review={reviewBy(FEATURED)} featured />
+          </div>
+          {MORE.map((name, index) => (
+            <div key={name} {...reveal(120 + index * 100)}>
+              <ReviewCard review={reviewBy(name)} />
+            </div>
           ))}
         </div>
 

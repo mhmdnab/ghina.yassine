@@ -31,7 +31,7 @@ function validate({ name, phone }: Fields): Errors {
 }
 
 const inputStyles =
-  "mt-2 block w-full rounded-xl border border-line bg-page px-4 py-3 text-ink placeholder:text-muted/70 transition-colors focus:border-accent-strong focus:bg-surface focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong";
+  "mt-2 block w-full rounded-xl border border-line bg-page px-4 py-3 text-ink placeholder:text-muted transition-colors focus:border-accent-strong focus:bg-surface focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-strong";
 
 export function BookingForm() {
   const id = useId();

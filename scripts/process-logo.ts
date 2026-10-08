@@ -106,7 +106,8 @@ function sparklePath(masks: Masks): string {
 function pathData(svg: string): string {
   const match = svg.match(/<path[^>]*\sd="([^"]+)"/);
   if (!match) throw new Error("potrace returned no path");
-  return match[1];
+  // Whole units in the 4x space are a quarter pixel in the source: invisible, and ~40% smaller.
+  return match[1].replace(/-?\d+\.\d+/g, (n) => String(Math.round(Number(n))));
 }
 
 function svgDocument(

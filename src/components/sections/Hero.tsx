@@ -78,8 +78,9 @@ export function Hero() {
                 alt={portrait.alt}
                 placeholder="blur"
                 blurDataURL={portrait.outputs.blurDataURL}
+                // Eager but normal priority: on phones the photo sits below the headline,
+                // which is the Largest Contentful Paint, so it should not compete with the fonts.
                 loading="eager"
-                fetchPriority="high"
                 sizes="(min-width: 1024px) 460px, (min-width: 640px) 416px, 90vw"
                 className="aspect-[4/5] w-full object-cover object-[50%_20%]"
               />

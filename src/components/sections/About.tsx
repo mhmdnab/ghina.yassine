@@ -1,6 +1,6 @@
 import { Baby, Clock3, Ear, MessageCircle, Sparkles } from "lucide-react";
 import Image from "next/image";
-import { Confirm, Container, Credit, Eyebrow, Section } from "@/components/ui";
+import { Confirm, Container, Credit, Eyebrow, Section, reveal } from "@/components/ui";
 import { image } from "@/lib/content";
 
 // Each point is something her Google reviewers describe (see data/services.json → approach).
@@ -18,7 +18,7 @@ export function About() {
   return (
     <Section id="about" tone="sand" labelledBy="about-title">
       <Container className="grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-        <div className="relative mx-auto w-full max-w-md lg:max-w-none">
+        <div className="relative mx-auto w-full max-w-md lg:max-w-none" {...reveal()}>
           <div
             aria-hidden="true"
             className="absolute -top-6 -left-6 size-40 rounded-full bg-accent-soft md:size-56"
@@ -38,7 +38,7 @@ export function About() {
           <Credit attribution={portrait.attribution} className="mt-3" />
         </div>
 
-        <div>
+        <div {...reveal(120)}>
           <Eyebrow>About</Eyebrow>
           <h2 id="about-title" className="text-4xl text-ink md:text-5xl">
             Meet Dr. Ghina

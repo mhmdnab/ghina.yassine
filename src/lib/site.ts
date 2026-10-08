@@ -72,3 +72,11 @@ export function whatsappLink(message?: string): string {
 export function formatTime(value: string): string {
   return value.replace(/^(\d{1,2}) (AM|PM)$/, "$1:00 $2");
 }
+
+/** "8 AM" / "8:30 PM" -> "08:00" / "20:30", as schema.org opening hours expect. */
+export function to24h(value: string): string {
+  const match = value.match(/^(\d{1,2})(?::(\d{2}))? (AM|PM)$/);
+  if (!match) return value;
+  const hour = (Number(match[1]) % 12) + (match[3] === "PM" ? 12 : 0);
+  return `${String(hour).padStart(2, "0")}:${match[2] ?? "00"}`;
+}

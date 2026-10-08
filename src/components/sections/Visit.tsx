@@ -1,14 +1,14 @@
 import { Accessibility, ArrowUpRight, MapPin, Navigation, Phone } from "lucide-react";
 import { OpeningHours } from "@/components/OpeningHours";
 import { WhatsAppIcon } from "@/components/icons";
-import { Container, Eyebrow, Section, buttonStyles } from "@/components/ui";
+import { Container, Eyebrow, Section, buttonStyles, reveal } from "@/components/ui";
 import { site, whatsappLink } from "@/lib/site";
 
 export function Visit() {
   return (
     <Section id="visit" labelledBy="visit-title">
       <Container>
-        <div className="max-w-2xl">
+        <div className="max-w-2xl" {...reveal()}>
           <Eyebrow>Hours and location</Eyebrow>
           <h2 id="visit-title" className="text-4xl text-ink md:text-5xl">
             Come and see us in Achrafieh
@@ -16,7 +16,10 @@ export function Visit() {
         </div>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="flex flex-col gap-8 rounded-card border border-line bg-surface p-6 shadow-soft md:p-8">
+          <div
+            className="flex flex-col gap-8 rounded-card border border-line bg-surface p-6 shadow-soft md:p-8"
+            {...reveal()}
+          >
             <OpeningHours />
 
             <address className="not-italic">
@@ -66,7 +69,7 @@ export function Visit() {
             </div>
           </div>
 
-          <div className="flex flex-col">
+          <div className="flex flex-col" {...reveal(120)}>
             <div className="relative min-h-80 flex-1 overflow-hidden rounded-card border border-line bg-sand shadow-soft">
               <iframe
                 title="Map showing Dr. Ghina Yassine Clinic in the Rubik Building, Achrafieh, Beirut"

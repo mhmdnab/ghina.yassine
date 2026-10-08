@@ -1,7 +1,7 @@
 import { Baby, Gem, HeartHandshake, Smile } from "lucide-react";
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { Confirm, Container, Credit, Eyebrow, Section } from "@/components/ui";
+import { Confirm, Container, Credit, Eyebrow, Section, reveal } from "@/components/ui";
 import { image } from "@/lib/content";
 
 /**
@@ -51,7 +51,7 @@ export function Services() {
   return (
     <Section id="services" labelledBy="services-title">
       <Container>
-        <div className="max-w-2xl">
+        <div className="max-w-2xl" {...reveal()}>
           <Eyebrow>Services</Eyebrow>
           <h2 id="services-title" className="text-4xl text-ink md:text-5xl">
             How she can help
@@ -62,10 +62,11 @@ export function Services() {
         </div>
 
         <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {SERVICES.map(({ icon: Icon, title, text, confirm }) => (
+          {SERVICES.map(({ icon: Icon, title, text, confirm }, index) => (
             <li
               key={title}
               className="flex flex-col rounded-card border border-line bg-surface p-6 shadow-soft"
+              {...reveal(index * 90)}
             >
               <span className="grid size-12 place-items-center rounded-2xl bg-accent-soft text-accent-strong">
                 <Icon size={22} aria-hidden="true" />
@@ -94,7 +95,7 @@ export function Services() {
           ))}
         </ul>
 
-        <div className="mt-6 rounded-card border border-dashed border-accent-strong/40 bg-surface/60 p-6 md:p-8">
+        <div className="mt-6 rounded-card border border-dashed border-accent-strong/40 bg-surface/60 p-6 md:p-8" {...reveal()}>
           <Confirm>services list</Confirm>
           <p className="mt-3 text-muted">
             Still to confirm with Dr. Ghina before listing: check-ups and cleaning, fillings, root

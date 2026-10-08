@@ -14,6 +14,7 @@ npm run fetch:maps   # pull Google Maps listing data and photos (needs an API ke
 npm run fetch:maps:browser   # same, from the public listing page (no key)
 npm run process:images       # data/assets.json -> optimized WebP in public/images/
 npm run process:logo         # her logo -> SVG/PNG set in public/brand/ + app icons
+npm run make:og              # share card -> src/app/opengraph-image.jpg (needs network for fonts)
 ```
 
 ## Google Maps data
@@ -31,6 +32,12 @@ npm run process:logo         # her logo -> SVG/PNG set in public/brand/ + app ic
 No API key? `npm run fetch:maps:browser` reads the public Maps listing with headless
 Chromium (`playwright-core`; run `npx playwright install chromium` once on a new machine)
 and writes the same files. Signed out, Google shows only the 5 most relevant reviews.
+
+## Deploy
+
+Static site for Vercel, no environment variables required. Optional: set
+`NEXT_PUBLIC_SITE_URL` (for example `https://www.example.com`) once there is a real domain,
+so canonical, Open Graph and structured data URLs use it. Without it, Vercel's own URL is used.
 
 ## Folders
 
