@@ -1,0 +1,82 @@
+{
+  "source": "Google Maps web listing, read with a headless browser (signed out)",
+  "placeId": "ChIJR-aCGxgXHxURGSOXHJd8nsg",
+  "googleMapsUri": "https://www.google.com/maps/place/Dr.ghina+yassine+clinic+achrafieh/@33.8826778,35.5207595,17z/data=!4m15!1m8!3m7!1s0x151f17181b82e647:0xc89e7c971c972319!2sDr.ghina+yassine+clinic+achrafieh!8m2!3d33.8826778!4d35.5207595!10e1!16s%2Fg%2F11srykclpz!3m5!1s0x151f17181b82e647:0xc89e7c971c972319!8m2!3d33.8826778!4d35.5207595!16s%2Fg%2F11srykclpz",
+  "reviewsUri": "https://search.google.com/local/reviews?placeid=ChIJR-aCGxgXHxURGSOXHJd8nsg",
+  "rating": 4.9,
+  "userRatingCount": 54,
+  "note": "Google shows signed-out visitors the 5 most relevant reviews; the rest need sign-in.",
+  "fetchedAt": "2026-10-08T10:37:01.578Z",
+  "reviews": [
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT25NMGNqUnBiV2RYYkRneU16UlRhVTlOUlU5ZmVFRRAB",
+      "rating": 5,
+      "text": "The best dental experience! Very professional, friendly, and always makes sure you’re comfortable. Thank you for the great care!",
+      "language": "en",
+      "translatedText": null,
+      "authorName": "ghida kassab",
+      "authorUri": "https://www.google.com/maps/contrib/110873891095180425444/reviews",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a-/ALV-UjWsvRYZiHvpFf9hp0lZilgsaXWuXSOlq5Mg03m_I_oyb-U40qsR=w120-h120-p-rp-mo-br100",
+      "authorMeta": "6 reviews · 3 photos",
+      "relativePublishTime": "8 months ago",
+      "hasOwnerResponse": false,
+      "hasReviewPhotos": false
+    },
+    {
+      "id": "Ci9DQUlRQUNvZENodHljRjlvT2xKc05tczFURkZJZDBzM1VHTmpaMkY1ZUVsQ09FRRAB",
+      "rating": 5,
+      "text": "Very considerate and highly recommended for anyone who struggles with anxiety. She takes the time to truly understand and listen, knows when to pause and give space, and always prioritizes comfort. She is punctual, never rushed, explains everything clearly, and maintains a warm, welcoming smile.\nThe environment is healthy and reassuring you can feel it through how comfortable the staff are. For me, the comfort of the employees reflects how considerate the doctor is with everyone she works with. Prices are fair, especially considering the quality of the service and the results.",
+      "language": "en",
+      "translatedText": null,
+      "authorName": "Karen Ghafary",
+      "authorUri": "https://www.google.com/maps/contrib/116320844721440713082/reviews",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a/ACg8ocKHWpPEulUlsyyfnHXXSM5ZOoPG-bWbRPu8F7exXzMoELPMAg=w120-h120-p-rp-mo-br100",
+      "authorMeta": "Local Guide · 41 reviews · 22 photos",
+      "relativePublishTime": "8 months ago",
+      "hasOwnerResponse": false,
+      "hasReviewPhotos": false
+    },
+    {
+      "id": "ChdDSUhNMG9nS0VJQ0FnTURJa1lMWmpnRRAB",
+      "rating": 5,
+      "text": "Dr. Ghina  is simply fantastic! My toddler had such a positive experience with her that he still talks about it. She was incredibly gentle and made him feel completely comfortable. Her work is excellent, and her way with children is truly special. We highly recommend her – she's a perfect dentist for kids!",
+      "language": "en",
+      "translatedText": null,
+      "authorName": "Maryam Ab",
+      "authorUri": "https://www.google.com/maps/contrib/118445253336698828923/reviews",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a/ACg8ocLDyrPukJ06PJBrcdSUoc55pwJzmZ_tNkuR4-loBnPvT3mGvw=w120-h120-p-rp-mo-br100",
+      "authorMeta": "1 review",
+      "relativePublishTime": "a year ago",
+      "hasOwnerResponse": false,
+      "hasReviewPhotos": false
+    },
+    {
+      "id": "ChdDSUhNMG9nS0VJQ0FnTUNZaEotNm5BRRAB",
+      "rating": 5,
+      "text": "Here is where a dentist visit no longer feels like a nightmare, a completely different experience: light, neat, and genuinely comforting.\n\nDr. Ghina is incredibly FRIENDLY and puts you at EASE the moment you walk in. Even during treatments, with your mouth open, the soothing background MUSIC makes you forget you’re in the middle of a procedure.\n\nHIGHLY RECOMMENDED.",
+      "language": "en",
+      "translatedText": null,
+      "authorName": "sawsan h",
+      "authorUri": "https://www.google.com/maps/contrib/100008280094350790297/reviews",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a/ACg8ocL4rMGSgy8dacOrjSroO3sX2O6Gy42TYabX40gwUsjPZi99Gew=w120-h120-p-rp-mo-br100",
+      "authorMeta": "1 review",
+      "relativePublishTime": "a year ago",
+      "hasOwnerResponse": false,
+      "hasReviewPhotos": false
+    },
+    {
+      "id": "ChZDSUhNMG9nS0VJQ0FnTURJa2JDRUdnEAE",
+      "rating": 5,
+      "text": "Favorite Doctor Ever ♥️\nShe knows exactly how to take care of her patients from the beginning to the end of their dental care journey.\nVery clean and hygienic clinic.\nEven though it's a dental clinic, but it has a good vibes clinic 😍 always welcomed with a great big Smile 🥰",
+      "language": "en",
+      "translatedText": null,
+      "authorName": "Alia Al hajj",
+      "authorUri": "https://www.google.com/maps/contrib/110084129521613421362/reviews",
+      "authorPhotoUri": "https://lh3.googleusercontent.com/a/ACg8ocJB-XM32gYHGyEE7eEgb9Tr1W6ZuGzE3dajVgeMZCtMdgjRnA=w120-h120-p-rp-mo-br100",
+      "authorMeta": "5 reviews · 9 photos",
+      "relativePublishTime": "a year ago",
+      "hasOwnerResponse": false,
+      "hasReviewPhotos": false
+    }
+  ]
+}

@@ -11,6 +11,7 @@ npm run dev          # local dev server on http://localhost:3000
 npm run build        # production build
 npm run lint
 npm run fetch:maps   # pull Google Maps listing data and photos (needs an API key)
+npm run fetch:maps:browser   # same, from the public listing page (no key)
 ```
 
 ## Google Maps data
@@ -24,6 +25,10 @@ npm run fetch:maps   # pull Google Maps listing data and photos (needs an API ke
    - `assets-raw/maps/maps-NN.jpg`: listing photos at max 1600px wide
 
 `.env.local` is git-ignored. Never commit the key.
+
+No API key? `npm run fetch:maps:browser` reads the public Maps listing with headless
+Chromium (`playwright-core`; run `npx playwright install chromium` once on a new machine)
+and writes the same files. Signed out, Google shows only the 5 most relevant reviews.
 
 ## Folders
 

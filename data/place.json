@@ -1,0 +1,80 @@
+{
+  "source": "Google Maps web listing, read with a headless browser (signed out)",
+  "fetchedAt": "2026-10-08T10:36:57.449Z",
+  "placeId": "ChIJR-aCGxgXHxURGSOXHJd8nsg",
+  "displayName": {
+    "text": "Dr.ghina yassine clinic achrafieh"
+  },
+  "primaryType": "Dental clinic",
+  "rating": 4.9,
+  "userRatingCount": 54,
+  "ratingBreakdown": {
+    "1": 1,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 53
+  },
+  "reviewTopics": [
+    {
+      "topic": "comforting atmosphere",
+      "count": 4
+    },
+    {
+      "topic": "thoroughness",
+      "count": 2
+    },
+    {
+      "topic": "gentle care",
+      "count": 2
+    },
+    {
+      "topic": "clear explanations",
+      "count": 2
+    },
+    {
+      "topic": "excellent work",
+      "count": 2
+    },
+    {
+      "topic": "cleanliness",
+      "count": 2
+    },
+    {
+      "topic": "trustworthy",
+      "count": 2
+    },
+    {
+      "topic": "patient care",
+      "count": 2
+    },
+    {
+      "topic": "dental experience",
+      "count": 6
+    },
+    {
+      "topic": "humble",
+      "count": 2
+    }
+  ],
+  "formattedAddress": "Rubik building , 5th floor, Alfred Naccash, Beirut, Lebanon",
+  "internationalPhoneNumber": "+961 3 698 486",
+  "plusCode": "VGMC+38 Beirut, Lebanon",
+  "regularOpeningHours": {
+    "weekdayDescriptions": [
+      "Thursday: 8 AM to 8 PM",
+      "Friday: 8 AM to 8 PM",
+      "Saturday: 8 AM to 8 PM",
+      "Sunday: Closed",
+      "Monday: 8 AM to 8 PM",
+      "Tuesday: 8 AM to 8 PM",
+      "Wednesday: 8 AM to 8 PM"
+    ]
+  },
+  "attributes": [
+    "Has wheelchair accessible restroom",
+    "Has wheelchair accessible seating"
+  ],
+  "googleMapsUri": "https://www.google.com/maps/place/Dr.ghina+yassine+clinic+achrafieh/@33.8826778,35.5207595,17z/data=!4m15!1m8!3m7!1s0x151f17181b82e647:0xc89e7c971c972319!2sDr.ghina+yassine+clinic+achrafieh!8m2!3d33.8826778!4d35.5207595!10e1!16s%2Fg%2F11srykclpz!3m5!1s0x151f17181b82e647:0xc89e7c971c972319!8m2!3d33.8826778!4d35.5207595!16s%2Fg%2F11srykclpz",
+  "reviewsUri": "https://search.google.com/local/reviews?placeid=ChIJR-aCGxgXHxURGSOXHJd8nsg"
+}
